@@ -19,6 +19,6 @@ class MainActivity : AppCompatActivity() {
         //Aqui la pantalla esta creada
 
         // 1. Tomamos el control de todos los elementos de la parte de la UI
-        
+
     }
 }
