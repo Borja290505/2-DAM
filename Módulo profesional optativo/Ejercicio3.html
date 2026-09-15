@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=ç, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <script>
+            for (let tabla = 0; tabla <= 10; tabla++) {
+                document.write("<tr>");
+                
+                document.write("<th>Tabla del " + tabla + "</th>");
+                
+                for (let i = 0; i <= 10; i++) {
+                    document.write("<td>" + tabla + " x " + i + " = " + (tabla * i) + "</td>");
+                }
+                
+                document.write("</tr>");
+            }
+        </script>
+    </table>
+</body>
+</html>
