@@ -16,9 +16,8 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        //Aqui la pantalla esta creada
+        // Aquí la pantalla está creada.
 
-        // 1. Tomamos el control de todos los elementos de la parte de la UI
-
+        // 1 - Tomamos el control de todos los elementos de la parte de la UI
     }
 }
