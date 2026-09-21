@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        let numero1 = 3
+        let numero2 = 4
+        let operacion1 =(prompt("Que operacion deseas realizar (if / switch)?"))
+        let operacion2 =(prompt("Que operacion deseas realiza (suma, resta, multiplicacion o division)"))
+
+
+
+        if(operacion1 == "if"){
+            if(operacion2 == "suma"){
+                document.write(numero1 + " + " + numero2 + " = "+ (numero1+numero2))
+            }
+            if(operacion2 == "resta"){
+                document.write(numero1 + " - " + numero2 + " = "+ (numero1-numero2))
+            }
+            if(operacion2 == "multiplicacion"){
+                document.write(numero1 + " * " + numero2 + " = "+ (numero1*numero2))
+            }
+            if(operacion2 == "division"){
+                document.write(numero1 + " / " + numero2 + " = "+ (numero1/numero2))
+            }
+        }else if(operacion1="switch"){
+            switch(operacion2){
+                case "suma":
+                    document.write(numero1 + " + " + numero2 + " = "+ (numero1+numero2))
+                case "resta":
+                    document.write(numero1 + " - " + numero2 + " = "+ (numero1-numero2))
+                case "multiplicacion":
+                    document.write(numero1 + " * " + numero2 + " = "+ (numero1*numero2))
+                case "division":
+                    document.write(numero1 + " / " + numero2 + " = "+ (numero1/numero2))
+            }
+        }
+    </script>
+</body>
+</html>
