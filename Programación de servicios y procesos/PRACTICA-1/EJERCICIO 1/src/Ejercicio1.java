@@ -7,7 +7,7 @@ public class Ejercicio1 {
     public static void main(String[] args) {
         try {
             //Creamos el preceso
-            ProcessBuilder pDocumento = new ProcessBuilder("C:\\Program Files\\Notepad++\\notepad++.exe","C:\\Users\\dam2\\Desktop\\2-DAM\\Programación de servicios y procesos\\Ejercicio1.txt");
+            ProcessBuilder pDocumento = new ProcessBuilder("C:\\Program Files\\Notepad++\\notepad++.exe","C:\\Users\\dam2\\Desktop\\2-DAM\\Programación de servicios y procesos\\PRACTICA-1\\EJERCICIO 1\\Ejercicio1.txt");
 
             //Ejecutamos el proceso
             Process ej1 = pDocumento.start();
