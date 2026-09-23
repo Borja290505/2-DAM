@@ -13,14 +13,15 @@ class MainWindow(QMainWindow):
         formato.setBold(True)
         casilla.setFont(formato)
 
-        casilla.stateChanged.connect(self.muestraEstado)
+        casilla.stateChanged.connect(self.botonPulsadoySoltado)
 
         #Mostramos el contenedor por pantalla
         self.setCentralWidget(casilla)
 
-    def muestraEstado(self,s):
-        print(s)
-    
+    def botonPulsadoySoltado(self,pulsado):
+            print(["No pulsado","","Pulsado"][pulsado])
+
+
 app = QApplication([])
 
 window = MainWindow()

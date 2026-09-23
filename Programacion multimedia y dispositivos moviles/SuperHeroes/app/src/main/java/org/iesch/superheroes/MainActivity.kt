@@ -2,19 +2,26 @@ package org.iesch.superheroes
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.RatingBar
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import org.iesch.superheroes.databinding.ActivityMainBinding
 
 class MainActivity() : AppCompatActivity() {
+
+    //Creamos la variable lateint porque la vamos a iniciarlizar luego
+    private lateinit var binding : ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+
+        //Inicializamos el binding
+        binding = ActivityMainBinding.inflate(layoutInflater)
+
+        //Usamos el binging para introducir el codigo necesario
+        setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -22,14 +29,14 @@ class MainActivity() : AppCompatActivity() {
         }
 
         // A partir de aqui introduzco el codigo necesario
-        val botonGuardar = findViewById<Button>(R.id.Boton_guardar)
+        //val botonGuardar = findViewById<Button>(R.id.Boton_guardar)
 
-        botonGuardar.setOnClickListener {
+        binding.BotonGuardar.setOnClickListener {
             // Obtenemos lo valores al hacer click
-            val superHeroName = findViewById<EditText>(R.id.hero_edit_name).text.toString()
-            val alterEgoEdit = findViewById<EditText>(R.id.alter_ego_edit).text.toString()
-            val bio = findViewById<EditText>(R.id.bio_edit).text.toString()
-            val power = findViewById<RatingBar>(R.id.power).rating
+            val superHeroName = binding.heroEditName.text.toString()
+            val alterEgoEdit = binding.alterEgoEdit.text.toString()
+            val bio = binding.bioEdit.text.toString()
+            val power = binding.power.rating
 
 
             // Que quiero hacer cuando pulso el boton guardar
@@ -37,18 +44,16 @@ class MainActivity() : AppCompatActivity() {
         }
     }
 
-    fun irADetailActivity(superHeroName: String, alterEgoEdit: String, bio: String, power: Float) {
-        //Creamos el objeto
-        val intent = Intent(this, DetailsActivity::class.java)
-
-        //Añadimos todos los campos con el metodo putExtra
-        intent.putExtra("superHeroName",superHeroName)
-        intent.putExtra("alterEgoEdit",alterEgoEdit)
-        intent.putExtra("bio",bio)
+    fun irADetailActivity(superHeroName: String, alterEgo: String, bio: String, power: Float) {
+        // Creamos el objeto Intent
+        val intent = Intent(this, DetailActivity::class.java)
+        // Añadimos todos los campos con el metodo putExtra
+        intent.putExtra("superHeroName", superHeroName)
+        intent.putExtra("alterEgo", alterEgo)
+        intent.putExtra("bio", bio)
         intent.putExtra("power",power)
-
-        //Todos los datos se enviaran al DetailActivity
-        //Iniciamos la nueva actividad
+        // De esta manera, todos estos datos se enviarán al DetailActivity
+        // Iniciamos la nueva actividad
         startActivity(intent)
     }
 }

@@ -7,30 +7,34 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import org.iesch.superheroes.databinding.ActivityDetailsBinding
 
-class DetailsActivity : AppCompatActivity() {
+
+class DetailActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityDetailsBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_details)
+        binding = ActivityDetailsBinding .inflate(layoutInflater)
+        setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        //Ultimo paso recibimos los datos del main activity
+        // Ultimo paso: Recibimos los datos del Main Activity
         val bundle = intent.extras!!
         val superHeroName = bundle.getString("superHeroName") ?: "No hay nombre"
-        val alterEgoEdit = bundle.getString("alterEgoEdit") ?: "No hay nombre"
-        val bio = bundle.getString("bio") ?: "No hay nombre"
-        val power = bundle.getFloat ("power")
+        val alterEgo = bundle.getString("alterEgo") ?: "No hay AlterEgo"
+        val bio = bundle.getString("bio") ?: "No hay bio"
+        val power = bundle.getFloat("power")
 
-        //Rellenamos lo campos con los valores recibidos
-        findViewById<TextView>(R.id.heroName_tv).text = superHeroName
-        findViewById<TextView>(R.id.alter_ego_result).text = alterEgoEdit
-        findViewById<TextView>(R.id.bioResult).text = bio
-        findViewById<RatingBar>(R.id.ratingBar2).rating = power
-
+        // Rellenamos los campos conlos valores recibidos
+        binding.heroNameTv.text = superHeroName
+        binding.alterEgoResult.text = alterEgo
+        binding.bioResult.text = bio
+        binding.ratingBar2.rating = power
     }
 }
