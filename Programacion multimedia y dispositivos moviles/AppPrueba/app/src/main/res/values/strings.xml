@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">AppPrueba</string>
+    <string name="preguntaEdad">¿Cuántos años tienes?</string>
+    <string name="introduceEdad">Introduce tu edad humana</string>
+    <string name="calcular">Calcular edad canina</string>
+    <string name="textoToast">Debes introducir tu edad</string>
+    <string name="resultadotexto">Si fueras un perro, tendrías %d años.</string>
+</resources>
