@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1</title>
+
+    <script>
+        function insertar(evento){
+            nuevoNumero = document.createElement("li")
+            nodoNumero = document.createTextNode(Math.random())
+
+            nuevoNumero.appendChild(nodoNumero)
+            document.getElementById("miLista").appendChild(nuevoNumero)
+        }
+
+        function borrar(evento){
+            const contenedorLista = document.getElementById("miLista")
+            const ultimoElemento = contenedorLista.lastElementChild
+
+            if(ultimoElemento){
+                contenedorLista.removeChild(ultimoElemento)
+            }
+        }
+    </script>
+
+</head>
+<body>
+    <!-- Declaramos lo elementos de la pantalla-->
+    <ul id="miLista">
+        <li>Primer Elemento</li>
+        <li>Segundo Elemento</li>
+    </ul>
+    <input type="button" value="Insertar Aleatorio" onclick="insertar()">
+    <input type="button" value="Eliminar Ultimo Elemento" onclick="borrar()">
+    
+</body>
+</html>
