@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import org.iesch.practica1.databinding.ActivityMainBinding
 
-
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -16,9 +15,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Si no llega usuario (null) o llega vacío, mostramos "Usuario sin nombre"
         val usuario = intent.getStringExtra("usuario")
-
-        binding.buenosDias.text = ("Hola, " + (usuario)?.ifEmpty {"Usuario Sin nombre" })
+        val nombre = if (usuario.isNullOrBlank()) getString(R.string.usuario_sin_nombre) else usuario
+        binding.mainSaludoText.text = getString(R.string.hola_usuario, nombre)
 
         binding.layoutEdadCanina.setOnClickListener {
             startActivity(Intent(this, EdadCanina::class.java))
