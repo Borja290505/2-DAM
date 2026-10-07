@@ -26,10 +26,10 @@ class EdadCanina : AppCompatActivity() {
         val ageEdit = findViewById<EditText>(R.id.InputEdad)
 
         botonCalcular.setOnClickListener {
-            if (!ageEdit.text.toString().isEmpty()){
-                val edadString = ageEdit.text.toString()
-                val edadInt = edadString.toInt()*7
-                textoRespuesta.text = getString(R.string.textoRespuesta, edadInt)
+            // toIntOrNull evita el crash si el número es demasiado grande
+            val edad = ageEdit.text.toString().toIntOrNull()
+            if (edad != null) {
+                textoRespuesta.text = getString(R.string.textoRespuesta, edad * 7)
             } else {
                 Toast.makeText(this, R.string.texto_toast, Toast.LENGTH_SHORT).show()
             }

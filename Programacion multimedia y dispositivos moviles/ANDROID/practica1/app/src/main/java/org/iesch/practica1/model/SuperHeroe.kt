@@ -1,13 +1,11 @@
-package org.iesch.superheroes.model
+package org.iesch.practica1.model
 
-import android.os.Parcelable
+import java.io.Serializable
 
-// 1 - Me creo le objeto SuperHeroe y lo hago parcelizable
-
-data class SuperHeroe (
-
+// Serializable permite pasar el objeto entero entre Activities con intent.putExtra()
+data class SuperHeroe(
     val nombre: String,
     val alterEgo: String,
     val bio: String,
     val power: Float
-)
+) : Serializable
