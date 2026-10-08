@@ -1,0 +1,19 @@
+Usuario actual: 
+b304pc17\dam2
+Directorio actual: 
+C:\Users\dam2\Desktop\2-DAM\Programaci¢n de servicios y procesos\Ejercicios2
+Contenido del directorio: 
+ El volumen de la unidad C no tiene etiqueta.
+ El n£mero de serie del volumen es: D4BF-DDE5
+
+ Directorio de C:\Users\dam2\Desktop\2-DAM\Programaci¢n de servicios y procesos\Ejercicios2
+
+08/10/2026  20:15    <DIR>          .
+08/10/2026  20:03    <DIR>          ..
+08/10/2026  20:03               352 .gitignore
+08/10/2026  20:14    <DIR>          .idea
+08/10/2026  20:03               433 Ejercicios2.iml
+08/10/2026  20:15    <DIR>          out
+08/10/2026  20:06    <DIR>          src
+               2 archivos            785 bytes
+               5 dirs  1.614.084.902.912 bytes libres

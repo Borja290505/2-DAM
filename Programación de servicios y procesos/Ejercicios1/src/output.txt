@@ -1,0 +1,20 @@
+
+C:\Users\dam2\Desktop\2-DAM\Programaci¢n de servicios y procesos\Ejercicios1>ping www.dam2chomon.org 
+La solicitud de ping no pudo encontrar el host www.dam2chomon.org. Compruebe el nombre y
+vuelva a intentarlo.
+
+C:\Users\dam2\Desktop\2-DAM\Programaci¢n de servicios y procesos\Ejercicios1>ping www.google.es 
+
+Haciendo ping a www.google.es [142.251.36.195] con 32 bytes de datos:
+Respuesta desde 142.251.36.195: bytes=32 tiempo=29ms TTL=113
+Respuesta desde 142.251.36.195: bytes=32 tiempo=30ms TTL=113
+Respuesta desde 142.251.36.195: bytes=32 tiempo=29ms TTL=113
+Respuesta desde 142.251.36.195: bytes=32 tiempo=29ms TTL=113
+
+Estad¡sticas de ping para 142.251.36.195:
+    Paquetes: enviados = 4, recibidos = 4, perdidos = 0
+    (0% perdidos),
+Tiempos aproximados de ida y vuelta en milisegundos:
+    M¡nimo = 29ms, M ximo = 30ms, Media = 29ms
+
+C:\Users\dam2\Desktop\2-DAM\Programaci¢n de servicios y procesos\Ejercicios1>pring www.iesch.org 
