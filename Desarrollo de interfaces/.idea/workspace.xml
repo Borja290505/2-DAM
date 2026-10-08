@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="3e8da067-6d21-43d4-8059-9566146d96df" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../moviles/practica1/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../moviles/practica1/app/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../moviles/practica1/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../moviles/practica1/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../moviles/practica1/app/src/main/java/org/iesch/practica1/DetailActivity_superheroes.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../moviles/practica1/app/src/main/java/org/iesch/practica1/DetailActivity_superheroes.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../moviles/practica1/app/src/main/java/org/iesch/practica1/MainActivity_superheroes.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../moviles/practica1/app/src/main/java/org/iesch/practica1/MainActivity_superheroes.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../moviles/practica1/app/src/main/java/org/iesch/practica1/model/SuperHeroe.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../moviles/practica1/app/src/main/java/org/iesch/practica1/model/SuperHeroe.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../moviles/practica1/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../moviles/practica1/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../moviles/practica1/gradle/libs.versions.toml" beforeDir="false" afterPath="$PROJECT_DIR$/../moviles/practica1/gradle/libs.versions.toml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3K9AkuK24V9ygVHiBJcrVz4Jyo2" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/dam2/Desktop/Clase2/interfaces&quot;
+  }
+}</component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-63390994e64e-intellij.indexing.shared.core-IU-262.8665.337" />
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-IU-262.8665.337" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3e8da067-6d21-43d4-8059-9566146d96df" name="Changes" comment="" />
+      <created>1790959556927</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1790959556927</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
