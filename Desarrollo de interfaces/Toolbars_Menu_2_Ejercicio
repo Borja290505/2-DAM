@@ -1,0 +1,65 @@
+from PyQt6.QtCore import Qt, QSize
+from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QLineEdit, QVBoxLayout, QWidget, QCheckBox, QDoubleSpinBox, QSpinBox, QSlider, QDial, QCalendarWidget, QVBoxLayout, QHBoxLayout, QGroupBox, QRadioButton, QGridLayout, QStackedLayout, QTabWidget, QToolBar, QStatusBar
+from Color import Color
+from PyQt6.QtGui import QAction,QIcon
+
+class MainWindow(QMainWindow): # Asi se crea una clase
+
+    def __init__(self): # Asi se crea una funcio 
+        super().__init__() # Siempre se pone asi para crear la funcion dentro de una clase (se llamara nada mas llamar a la clase)
+        self.setWindowTitle("MiAplicacion")
+        self.cont = 1
+      
+        self.etiqueta = QLabel("Hola!")
+        
+        barra = QToolBar()
+        barra.setIconSize(QSize(16,16))
+        self.addToolBar(barra)
+        
+        boton = QAction(QIcon("icons/disk.png"),"Guardar", self)
+        boton.setStatusTip("Guardar") # Para que al hacer hover sobre el boton salga el tip (necesita lo de abajo tambien)
+
+        boton2 = QAction(QIcon("icons/document.png"),"Nuevo", self)
+        boton2.setStatusTip("Nuevo") # Para que al hacer hover sobre el boton salga el tip (necesita lo de abajo tambien)
+
+        boton3 = QAction(QIcon("icons/application-dock.png"),"Abrir", self)
+        boton3.setStatusTip("Abrir") # Para que al hacer hover sobre el boton salga el tip (necesita lo de abajo tambien)
+
+        boton4 = QAction("X", self)
+        boton4.setStatusTip("Siguenos en Twitter") # Para que al hacer hover sobre el boton salga el tip (necesita lo de abajo tambien)
+
+        boton5 = QAction("Instagram", self)
+        boton5.setStatusTip("Siguenos en Instagram") # Para que al hacer hover sobre el boton salga el tip (necesita lo de abajo tambien)
+
+        barra.addSeparator()
+
+        self.setStatusBar(QStatusBar(self)) # Esto!
+
+        barra.addAction(boton)
+        barra.addAction(boton2)
+        barra.addAction(boton3)
+
+        self.setCentralWidget(self.etiqueta)
+
+        menu = self.menuBar()
+        menu_archivo = menu.addMenu("&Archivo")
+        menu_ayuda = menu.addMenu("&Ayuda")
+
+        menu_archivo.addAction(boton)
+        menu_archivo.addAction(boton2)
+        menu_archivo.addAction(boton3)
+
+        menu_siguenos=menu_ayuda.addMenu("Siguenos")
+        menu_siguenos.addAction(boton4)
+        menu_siguenos.addAction(boton5)
+        
+
+    def textoCambiado(self, pulsacion):
+        self.etiqueta.setText(f"Texto cambiado {self.cont}")
+        self.cont += 1
+        
+app = QApplication([])
+window = MainWindow()
+window.show()
+
+app.exec() # Poner siempre si no la ventana se cierra instant
