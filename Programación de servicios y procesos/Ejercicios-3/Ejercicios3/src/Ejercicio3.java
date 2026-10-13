@@ -1,4 +1,4 @@
-public class Ejercicio3_3 {
+public class Ejercicio3 {
     static void main(String[] args) {
         Thread hilo1 = new Thread(() -> {
             try {

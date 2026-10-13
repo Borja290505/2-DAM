@@ -1,4 +1,4 @@
-public class Ejercicio3_4 {
+public class Ejercicio4 {
     static void main(String[] args) {
         String[] lista = {"Programas","Procesos","Servicios","Hilos"};
         long tiempoInicio = System.currentTimeMillis();
