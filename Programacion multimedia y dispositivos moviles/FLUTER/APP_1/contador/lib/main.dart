@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Center(
-          child: Text('Hola a DAM 2')
+          child: Text('Contador Screen')
         ),
       ),
     );
