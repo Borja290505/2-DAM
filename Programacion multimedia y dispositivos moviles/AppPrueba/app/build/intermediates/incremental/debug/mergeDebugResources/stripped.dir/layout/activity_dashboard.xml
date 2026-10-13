@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center"
+    android:background="#F5F5F5"
+    tools:context=".DashboardActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Panel Principal (Dashboard)"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selecciona la aplicación a la que deseas acceder:"
+        android:textSize="15sp"
+        android:textColor="#666666"
+        android:gravity="center"
+        android:layout_marginBottom="32dp"/>
+
+    <!-- FILA 1: App 1 y App 2 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="12dp">
+
+        <Button
+            android:id="@+id/btnAbrirApp1"
+            android:layout_width="0dp"
+            android:layout_height="65dp"
+            android:layout_weight="1"
+            android:text="App 1:\nCalculadora"
+            android:textSize="14sp"
+            android:backgroundTint="#1976D2"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/btnAbrirApp2"
+            android:layout_width="0dp"
+            android:layout_height="65dp"
+            android:layout_weight="1"
+            android:text="App 2:\nContador"
+            android:textSize="14sp"
+            android:backgroundTint="#388E3C"/>
+    </LinearLayout>
+
+    <!-- FILA 2: App 3 y App 4 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="32dp">
+
+        <Button
+            android:id="@+id/btnAbrirApp3"
+            android:layout_width="0dp"
+            android:layout_height="65dp"
+            android:layout_weight="1"
+            android:text="App 3:\nEdad Canina"
+            android:textSize="14sp"
+            android:backgroundTint="#F57C00"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/btnAbrirApp4"
+            android:layout_width="0dp"
+            android:layout_height="65dp"
+            android:layout_weight="1"
+            android:text="App 4:\nSuperhéroes"
+            android:textSize="14sp"
+            android:backgroundTint="#7B1FA2"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnCerrarSesion"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Cerrar Sesión"
+        android:textSize="15sp"
+        android:backgroundTint="#D32F2F"/>
+
+</LinearLayout>

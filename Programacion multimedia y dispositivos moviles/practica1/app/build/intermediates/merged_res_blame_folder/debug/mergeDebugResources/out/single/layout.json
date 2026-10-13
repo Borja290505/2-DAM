@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "org.iesch.practica1.app-mergeDebugResources-38:/layout/intro_activity.xml",
+        "source": "org.iesch.practica1.app-main-41:/layout/intro_activity.xml"
+    },
+    {
+        "merged": "org.iesch.practica1.app-mergeDebugResources-38:/layout/activity_detail_superheroes.xml",
+        "source": "org.iesch.practica1.app-main-41:/layout/activity_detail_superheroes.xml"
+    },
+    {
+        "merged": "org.iesch.practica1.app-mergeDebugResources-38:/layout/activity_main.xml",
+        "source": "org.iesch.practica1.app-main-41:/layout/activity_main.xml"
+    },
+    {
+        "merged": "org.iesch.practica1.app-mergeDebugResources-38:/layout/activity_main_superheroes.xml",
+        "source": "org.iesch.practica1.app-main-41:/layout/activity_main_superheroes.xml"
+    },
+    {
+        "merged": "org.iesch.practica1.app-mergeDebugResources-38:/layout/edad_canina.xml",
+        "source": "org.iesch.practica1.app-main-41:/layout/edad_canina.xml"
+    }
+]

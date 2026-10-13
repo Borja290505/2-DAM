@@ -1,0 +1,12 @@
+
+Haciendo ping a www.google.es [2a00:1450:4003:804::2003] con 32 bytes de datos:
+Respuesta desde 2a00:1450:4003:804::2003: tiempo=53ms 
+Respuesta desde 2a00:1450:4003:804::2003: tiempo=22ms 
+Respuesta desde 2a00:1450:4003:804::2003: tiempo=15ms 
+Respuesta desde 2a00:1450:4003:804::2003: tiempo=20ms 
+
+Estad¡sticas de ping para 2a00:1450:4003:804::2003:
+    Paquetes: enviados = 4, recibidos = 4, perdidos = 0
+    (0% perdidos),
+Tiempos aproximados de ida y vuelta en milisegundos:
+    M¡nimo = 15ms, M ximo = 53ms, Media = 27ms

@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "org.iesch.practica1.app-mergeDebugResources-37:/values-h480dp-v13/values-h480dp-v13.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\borja\\.gradle\\caches\\9.6.0\\transforms\\76a91908870908392386c6035866db27\\transformed\\material-1.14.0\\res\\values-h480dp-v13\\values-h480dp-v13.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,128,198,270",
+                        "endColumns": "72,69,71,69",
+                        "endOffsets": "123,193,265,335"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+[
+    {
+        "merged": "com.example.appprueba.app-mergeDebugResources-38:/layout/activity_login.xml",
+        "source": "com.example.appprueba.app-main-41:/layout/activity_login.xml"
+    },
+    {
+        "merged": "com.example.appprueba.app-mergeDebugResources-38:/layout/activity_dashboard.xml",
+        "source": "com.example.appprueba.app-main-41:/layout/activity_dashboard.xml"
+    },
+    {
+        "merged": "com.example.appprueba.app-mergeDebugResources-38:/layout/activity_calculadora.xml",
+        "source": "com.example.appprueba.app-main-41:/layout/activity_calculadora.xml"
+    },
+    {
+        "merged": "com.example.appprueba.app-mergeDebugResources-38:/layout/activity_contador.xml",
+        "source": "com.example.appprueba.app-main-41:/layout/activity_contador.xml"
+    },
+    {
+        "merged": "com.example.appprueba.app-mergeDebugResources-38:/layout/activity_superhero_detail.xml",
+        "source": "com.example.appprueba.app-main-41:/layout/activity_superhero_detail.xml"
+    },
+    {
+        "merged": "com.example.appprueba.app-mergeDebugResources-38:/layout/activity_edad_canina.xml",
+        "source": "com.example.appprueba.app-main-41:/layout/activity_edad_canina.xml"
+    },
+    {
+        "merged": "com.example.appprueba.app-mergeDebugResources-38:/layout/activity_superhero_form.xml",
+        "source": "com.example.appprueba.app-main-41:/layout/activity_superhero_form.xml"
+    }
+]
