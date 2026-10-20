@@ -1,8 +1,9 @@
-
 import 'package:flutter/material.dart';
 
-void main(List<String> args) {
-  runApp(MyApp());
+import 'screens/contador_screen.dart';
+
+void main() {
+  runApp( MyApp() );
 }
 
 class MyApp extends StatelessWidget {
@@ -13,11 +14,11 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Center(
-          child: Text('Contador Screen')
-        ),
+      theme: ThemeData(
+        useMaterial3: true
       ),
+      home: ContadorScreen()
     );
   }
+
 }
