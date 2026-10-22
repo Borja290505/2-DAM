@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MenuActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/verde"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imgPerfil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:src="@drawable/profile"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvSaludoUsuarioMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgPerfil"
+            tools:text="Hola, Borja" />
+
+        <TextView
+            android:id="@+id/tvSaludo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Buenos dias"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:textColor="@color/amarillo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvSaludoUsuarioMenu" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="409dp"
+        android:layout_height="200dp"
+        android:background="@color/verde"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <!--EDAD CANINA-->
+                <LinearLayout
+                    android:id="@+id/layoutEdadCanina"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/fondoBlanco1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/white_background">
+
+                        <ImageView
+                            android:id="@+id/circuloVerde"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:background="@drawable/circle_green"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/imgDogo"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:adjustViewBounds="true"
+                            android:background="@drawable/dogoargentino"
+                            app:layout_constraintBottom_toBottomOf="@+id/circuloVerde"
+                            app:layout_constraintEnd_toEndOf="@+id/circuloVerde"
+                            app:layout_constraintStart_toStartOf="@+id/circuloVerde"
+                            app:layout_constraintTop_toTopOf="@+id/circuloVerde" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/tvEdadCanina"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Edad Canina"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+
+                        app:layout_constraintEnd_toEndOf="@+id/circuloVerde"
+                        app:layout_constraintStart_toStartOf="@+id/circuloVerde"
+                        app:layout_constraintTop_toBottomOf="@+id/fondoBlanco1" />
+
+                </LinearLayout>
+
+                <!--SUPER HEROES-->
+                <LinearLayout
+                    android:id="@+id/layoutSuperHeroes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/fondoBlanco2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/white_background">
+
+                        <ImageView
+                            android:id="@+id/circuloVerde2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:background="@drawable/circle_green"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/imgSuperHeroe"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:adjustViewBounds="true"
+                            android:background="@drawable/calculadora"
+                            app:layout_constraintBottom_toBottomOf="@+id/circuloVerde2"
+                            app:layout_constraintEnd_toEndOf="@+id/circuloVerde2"
+                            app:layout_constraintStart_toStartOf="@+id/circuloVerde2"
+                            app:layout_constraintTop_toTopOf="@+id/circuloVerde2" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/tvSuperHeroe"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SuperHeroes"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@+id/circuloVerde"
+                        app:layout_constraintStart_toStartOf="@+id/circuloVerde"
+                        app:layout_constraintTop_toBottomOf="@+id/fondoBlanco1" />
+
+                </LinearLayout>
+
+                <!--QUIZZ-->
+                <LinearLayout
+                    android:id="@+id/layoutQuizz"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/fondoBlanco3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/white_background">
+
+                        <ImageView
+                            android:id="@+id/circuloVerde3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:background="@drawable/circle_green"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/imgQuizz"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:adjustViewBounds="true"
+                            android:background="@drawable/pregunta"
+                            app:layout_constraintBottom_toBottomOf="@+id/circuloVerde3"
+                            app:layout_constraintEnd_toEndOf="@+id/circuloVerde3"
+                            app:layout_constraintStart_toStartOf="@+id/circuloVerde3"
+                            app:layout_constraintTop_toTopOf="@+id/circuloVerde3" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/tvQuizz"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Quizz"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@+id/circuloVerde3"
+                        app:layout_constraintStart_toStartOf="@+id/circuloVerde3"
+                        app:layout_constraintTop_toBottomOf="@+id/fondoBlanco3" />
+
+                </LinearLayout>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <!--EDAD CANINA-->
+                <LinearLayout
+                    android:id="@+id/layoutAjustes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/fondoBlanco4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/white_background">
+
+                        <ImageView
+                            android:id="@+id/circuloVerde4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:background="@drawable/circle_green"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/imgAjustes"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:adjustViewBounds="true"
+                            android:background="@drawable/btn_4"
+                            app:layout_constraintBottom_toBottomOf="@+id/circuloVerde4"
+                            app:layout_constraintEnd_toEndOf="@+id/circuloVerde4"
+                            app:layout_constraintStart_toStartOf="@+id/circuloVerde4"
+                            app:layout_constraintTop_toTopOf="@+id/circuloVerde4" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/tvAjustes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ajustes"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@+id/fondoBlanco4"
+                        app:layout_constraintStart_toStartOf="@+id/fondoBlanco4"
+                        app:layout_constraintTop_toBottomOf="@+id/fondoBlanco4" />
+
+                </LinearLayout>
+
+                <!--SUPER HEROES-->
+                <LinearLayout
+                    android:id="@+id/layoutFavoritos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/fondoBlanco5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/white_background">
+
+                        <ImageView
+                            android:id="@+id/circuloVerde5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:background="@drawable/circle_green"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/imgFav"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:adjustViewBounds="true"
+                            android:background="@drawable/btn_5"
+                            app:layout_constraintBottom_toBottomOf="@+id/circuloVerde5"
+                            app:layout_constraintEnd_toEndOf="@+id/circuloVerde5"
+                            app:layout_constraintStart_toStartOf="@+id/circuloVerde5"
+                            app:layout_constraintTop_toTopOf="@+id/circuloVerde5" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/tvFavoritos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Favoritos"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@+id/circuloVerde"
+                        app:layout_constraintStart_toStartOf="@+id/circuloVerde"
+                        app:layout_constraintTop_toBottomOf="@+id/fondoBlanco1" />
+
+                </LinearLayout>
+
+                <!--QUIZZ-->
+                <LinearLayout
+                    android:id="@+id/layoutSalida"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/fondoBlanco6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/white_background">
+
+                        <ImageView
+                            android:id="@+id/circuloVerde6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:background="@drawable/circle_green"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/imgSalida"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:adjustViewBounds="true"
+                            android:background="@drawable/pregunta"
+                            app:layout_constraintBottom_toBottomOf="@+id/circuloVerde6"
+                            app:layout_constraintEnd_toEndOf="@+id/circuloVerde6"
+                            app:layout_constraintStart_toStartOf="@+id/circuloVerde6"
+                            app:layout_constraintTop_toTopOf="@+id/circuloVerde6" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/tvSalida"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Salida"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@+id/circuloVerde3"
+                        app:layout_constraintStart_toStartOf="@+id/circuloVerde3"
+                        app:layout_constraintTop_toBottomOf="@+id/fondoBlanco3" />
+
+                </LinearLayout>
+
+            </TableRow>
+
+
+        </TableLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,7 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SuperHeroes">
         <activity
-            android:name=".MainActivity"
+            android:name=".SuperHeroeActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".LoginActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
@@ -22,11 +26,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".DetailActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".DetailActivity"
+            android:name=".MenuActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".PreguntaActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".SolucionActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
     </application>
