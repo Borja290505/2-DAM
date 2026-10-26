@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <br/>
+        Direccion Mail: <input type="text" id="mail">
+        <input type="Button" value="Enviar" onclick="comprobarMail()">
+        <p id="result"/>
+    </form>
+
+    <script>
+        function comprobarMail(){
+            var direccion = document.getElementById("mail").value
+            var posArr = direccion.indexOf('@')
+            var posDom = direccion.indexOf('.')
+
+            if(posArr!=null && posArr!=0 && posDom>posArr+1){
+                document.getElementById("result").innerHTML = "Es valido, Usuario: " + direccion.substring(0,posArr) + " el dominio es: " + direccion.substring(posArr+1,direccion.length);
+            }else{
+                document.getElementById("result").innerHTML = "No es valido"
+            }
+        }
+    </script>
+</body>
+</html>

@@ -40,8 +40,8 @@
 
     <script>
         
-        var festivos = [[1, 6], [], [], [2, 3], [1, 2, 15], [], [], [15], [], [12], [2, 9], [7, 8, 25]]
-; 
+        var festivos = [[1, 6], [], [], [2, 3], [1, 2, 15], [], [], [15], [], [12], [2, 9], [7, 8, 25]]; 
+
         const nombresMes = [
             "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
             "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
@@ -59,17 +59,13 @@
         }
 
         function generarCalendario(mes, anio) {
-            //Definimos el calendario y el titulo que va ha ser el mes
             const tabla = document.getElementById("calendar");
             const titulo = document.getElementById("month-title");
             
-            
             tabla.innerHTML = "";
 
-            //Que en el titulo ponga el mes y el año que se desea buscar
             titulo.innerText = `${nombresMes[mes]} ${anio}`;
 
-        
             const filaCabecera = document.createElement("tr");
 
 
@@ -78,25 +74,20 @@
                 th.innerText = dia;
                 filaCabecera.appendChild(th);
             });
-            2
+            
             tabla.appendChild(filaCabecera);
 
-           
             const primerDiaSemana = new Date(anio, mes, 1).getDay();
             const totalDias = new Date(anio, mes + 1, 0).getDate();
 
-            
             let filaActual = document.createElement("tr");
 
-            // 2. Rellenar los huecos vacíos de la primera semana
             for (let i = 0; i < primerDiaSemana; i++) {
                 const tdVacio = document.createElement("td");
                 filaActual.appendChild(tdVacio);
             }
 
-            // 3. Rellenar los días del mes
             for (let dia = 1; dia <= totalDias; dia++) {
-                // Si la fila actual ya tiene 7 columnas, la añadimos a la tabla y creamos una nueva
                 if (filaActual.children.length === 7) {
                     tabla.appendChild(filaActual);
                     filaActual = document.createElement("tr");
@@ -105,7 +96,6 @@
                 const tdDia = document.createElement("td");
                 tdDia.innerText = dia;
 
-                // Comprobar si es festivo
                 if (festivos[mes].includes(dia)) {
                     tdDia.className = "festivo";
                 }
@@ -113,13 +103,11 @@
                 filaActual.appendChild(tdDia);
             }
 
-            // 4. Completar con celdas vacías la última semana si se queda incompleta
             while (filaActual.children.length < 7) {
                 const tdVacio = document.createElement("td");
                 filaActual.appendChild(tdVacio);
             }
             
-            // Añadir la última fila procesada a la tabla
             tabla.appendChild(filaActual);
         }
     </script>

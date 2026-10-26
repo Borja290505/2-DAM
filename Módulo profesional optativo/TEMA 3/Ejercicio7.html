@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        Cadena: <input type="text" id="cadena"/>
+        <input type="button" value="Enviar" onclick="esPalindromo()" >
+        <p id="result"/>
+    </form>
+
+    <script>
+        function esPalindromo(){
+            var cad = document.getElementById("cadena").value
+            cad = cad.replaceAll(" ", ""); 
+            cad = cad.toLowerCase();
+            cadRev = alReves(cad);
+            if(cadRev == cad){
+                document.getElementById("result").innerHTML = "Es palindromo"
+            }else{
+                document.getElementById("result").innerHTML = "No es palindromo"
+            }
+        }
+    </script>
+
+    <script>
+        function alReves(str){
+            return str.split("").reverse().join("")
+        }
+    </script>
+</body>
+</html>
