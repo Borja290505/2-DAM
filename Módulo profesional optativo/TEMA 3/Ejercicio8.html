@@ -8,12 +8,29 @@
 <body>
     <form>
         Inserte nombre y apellidos: <input type="text" id="nomape"/>
-        <input type="button" value="Enviar" onclick="" >
+        <input type="button" value="Enviar" onclick="comprobraNomApe()" >
         <p id="result"/>
+        
     </form>
     <script>
         function comprobraNomApe(){
-            
+            var nomApe = document.getElementById('nomape').value
+            var nomApeArr = nomApe.split(' ')
+            var nomApeRes = ""
+            var nom
+            for(var i = 0; i < nomApeArr.length; i++){
+                if(i==0){
+                    nom = nomApeArr[i]
+                }else{
+                    nomApeRes += nomApeArr[i]
+                    if(i==nomApeArr.length-1){
+                        nomApeRes += ", " + nom
+                    }else{
+                        nomApeRes+=" "
+                    }
+                }
+            }
+            document.getElementById("result").innerHTML = nomApeRes;
         }
     </script>
 </body>

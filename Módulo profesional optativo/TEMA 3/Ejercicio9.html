@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        Inserte una frase: <input type="text" id="frase"/>
+        <input type="button" value="Enviar" onclick="convertirFrase()" >
+        <p id="result"/>
+    </form>
+    <script>
+        function convertirFrase(){
+            var frase = document.getElementById('frase').value
+            var fraseArr = frase.split(' ')
+            var fraseRes = ""
+            for(var i = 0; i<fraseArr.length;i++){
+                fraseRes += cambiarLetras(fraseArr[i])
+                if(i<fraseArr.length-1){
+                    fraseRes += " "
+                }
+            }
+            document.getElementById("result").innerHTML = fraseRes;
+
+        }
+
+        function cambiarLetras(str){
+            var arrStr = str.split("")
+            str = "";
+            for(var i = 0; i<arrStr.length;i++){
+                if(i==0){
+                    str += arrStr[i].toUpperCase()
+                }else{
+                    str += arrStr[i].toLowerCase()             }
+            }
+            return str
+        }
+    </script>
+</body>
+</html>
