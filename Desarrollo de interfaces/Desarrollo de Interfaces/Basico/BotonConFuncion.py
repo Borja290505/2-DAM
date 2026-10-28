@@ -16,9 +16,9 @@ class MainWindow(QMainWindow): # Asi se crea una clase
         
         self.setCentralWidget(self.boton)
 
-    def botonpulsadoYsoltado(self, pulsado):
-             self.boton.setText([f"No pulsado {self.cont} " , f"pulsado{self.cont}"][pulsado])
-             self.cont +=1
+    def botonpulsado(self): 
+            self.clicks = self.clicks+1
+            print(self.clicks)
        
            
 app = QApplication([])

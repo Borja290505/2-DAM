@@ -1,6 +1,7 @@
 package org.iesch.ad.demoSpring1.modelo;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.engine.jdbc.Size;
@@ -10,7 +11,6 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Builder
-@ToString
 @EqualsAndHashCode
 @Entity
 @AllArgsConstructor
@@ -27,6 +27,7 @@ public class Persona {
     private LocalDateTime createAt;
 
     @OneToOne(cascade = CascadeType.ALL)
+            @JoinColumn(name = "coche_id", referencedColumnName = "id")
     Coche coche;
 
     @PrePersist
@@ -38,4 +39,5 @@ public class Persona {
     public void postGuardar(){
         System.out.println("Se guarda la persona con id:" + this.id);
     }
+
 }

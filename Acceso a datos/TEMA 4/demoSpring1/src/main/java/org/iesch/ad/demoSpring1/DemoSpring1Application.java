@@ -1,23 +1,17 @@
 package org.iesch.ad.demoSpring1;
 
-import lombok.RequiredArgsConstructor;
 import org.iesch.ad.demoSpring1.modelo.Coche;
 import org.iesch.ad.demoSpring1.modelo.Persona;
 import org.iesch.ad.demoSpring1.repositorio.CocheRepositorio;
+import org.iesch.ad.demoSpring1.repositorio.OrdenRepositorio;
 import org.iesch.ad.demoSpring1.repositorio.PersonaRepositorio;
+import org.iesch.ad.demoSpring1.repositorio.ClienteRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 
-import javax.swing.*;
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 @SpringBootApplication
@@ -40,6 +34,12 @@ public class DemoSpring1Application implements CommandLineRunner {
 
 	@Autowired
 	CocheRepositorio cocheRepositorio;
+
+	@Autowired
+	ClienteRepositorio clienteRepositorio;
+
+	@Autowired
+	OrdenRepositorio ordenRepositorio;
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoSpring1Application.class, args);
@@ -148,21 +148,64 @@ public class DemoSpring1Application implements CommandLineRunner {
 //		//Guardamos en BBDD
 //		personaRepositorio.save(persona);
 
-		Optional<Persona> persona = personaRepositorio.findById(14L);
+
+		/*
+			Optional<Persona> persona = personaRepositorio.findById(14L);
+			if (persona.isPresent()){
+				Persona p = persona.get();
+				System.out.println(p);
+			}else {
+				System.out.println("No hay ninguna persona");
+			}
+
+			Optional<Coche> coche = cocheRepositorio.findById(1L);
+			if (coche.isPresent()){
+				Coche c = coche.get();
+				System.out.println(c);
+			}else {
+				System.out.println("No hay ninguna coche");
+			}
+		 */
+
+		System.out.println("OneToOne Bidireccional");
+
+		/*
+			Persona persona = new Persona();
+			persona.setDni("18779900G");
+			persona.setNombre("Pepito");
+			persona.setApellidos("Perez Sanchez");
+			persona.setEmail("pepitops@gmail.com");
+
+			//personaRepositorio.save(persona);
+
+			Coche coche = new Coche();
+			coche.setMatricula("9988 NTP");
+
+			//cocheRepositorio.save(coche);
+			persona.setCoche(coche);
+			coche.setPersona(persona);
+
+			personaRepositorio.save(persona);
+		 */
+
+		System.out.println("Peta Bidireccional");
+		Optional<Persona> persona = personaRepositorio.findById(15L);
 		if (persona.isPresent()){
-			Persona p = persona.get();
-			System.out.println(p);
-		}else {
-			System.out.println("No hay ninguna persona");
+			Persona persona1 = persona.get();
+			System.out.println(persona1);
 		}
 
-		Optional<Coche> coche = cocheRepositorio.findById(1L);
+		Optional<Coche> coche = cocheRepositorio.findById(2L);
 		if (coche.isPresent()){
-			Coche c = coche.get();
-			System.out.println(c);
-		}else {
-			System.out.println("No hay ninguna coche");
+			Coche coche1 = coche.get();
+			System.out.println(coche1);
 		}
+
+
+
+
+
+
 
 	}
 
