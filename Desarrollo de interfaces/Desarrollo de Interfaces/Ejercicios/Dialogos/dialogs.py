@@ -20,8 +20,4 @@ class CustomDialog(QDialog):
         self.plantilla.addWidget(self.dialogBox)
         
         self.setLayout(self.plantilla)
-        
-app = QApplication([])
-window = CustomDialog()
-window.show()
-app.exec()
+

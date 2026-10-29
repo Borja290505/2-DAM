@@ -10,7 +10,9 @@ class MainWindow(QMainWindow): # Asi se crea una clase
         self.setWindowTitle("MiAplicacion")
 
         boton = QPushButton("Pulsa Aqui")
+
         boton.clicked.connect(self.botonPulsado)
+        
         self.setCentralWidget(boton)
         
 
