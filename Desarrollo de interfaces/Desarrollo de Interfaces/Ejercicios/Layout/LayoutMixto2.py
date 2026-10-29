@@ -22,18 +22,10 @@ class MainWindow(QMainWindow): # Asi se crea una clase
         plantilla2.addWidget(boton2)
         plantilla1.addWidget(boton3)
 
- 
-
         widget = QWidget()
         widget.setLayout(plantilla1)
         self.setCentralWidget(widget)
-      
-
-       
             
-             
-       
-           
 app = QApplication([])
 window = MainWindow()
 window.show()

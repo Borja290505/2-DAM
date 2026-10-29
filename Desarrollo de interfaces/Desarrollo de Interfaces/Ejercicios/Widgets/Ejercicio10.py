@@ -10,7 +10,7 @@ class MainWindow(QMainWindow): # Asi se crea una clase
         self.setWindowTitle("MiTitulo")
         self.cont = 0
  
-        self.boton = QPushButton("Pulsa para Israel")
+        self.boton = QPushButton("Pulsa")
         self.boton.setCheckable(True)
         self.boton.setChecked(True)
         self.boton.clicked.connect(self.botonpulsadoYsoltado) # Denominado SIGNAL
@@ -18,7 +18,7 @@ class MainWindow(QMainWindow): # Asi se crea una clase
         self.setCentralWidget(self.boton)
 
     def botonpulsadoYsoltado(self):
-        self.boton.setText("israel")
+        self.boton.setText("Boton ya pulsado")
         self.boton.setEnabled(False)
         
         

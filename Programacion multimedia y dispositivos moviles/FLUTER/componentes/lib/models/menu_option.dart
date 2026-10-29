@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-class menuOption{
+class MenuOption {
+
   final String ruta;
   final IconData icono;
   final String nombre;
@@ -8,8 +9,9 @@ class menuOption{
   new({
     required this.ruta, 
     required this.icono, 
-    required this.nombre
+    required this.nombre,
   });
 
- 
+
+
 }

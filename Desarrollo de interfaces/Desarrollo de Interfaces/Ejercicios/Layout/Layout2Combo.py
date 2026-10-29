@@ -2,19 +2,14 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QLineEdit, QVBoxLayout, QWidget, QCheckBox, QDoubleSpinBox, QSpinBox, QSlider, QDial, QCalendarWidget, QVBoxLayout, QHBoxLayout
 from Color import Color
 
-class MainWindow(QMainWindow): # Asi se crea una clase
-
-    # En caso de para valores decimanles es QDoubleSpinBox
-    
-    def __init__(self): # Asi se crea una funcio 
-        super().__init__() # Siempre se pone asi para crear la funcion dentro de una clase (se llamara nada mas llamar a la clase)
+class MainWindow(QMainWindow):     
+    def __init__(self): 
+        super().__init__() 
         self.setWindowTitle("MiAplicacion")
 
-        plantilla1 = QHBoxLayout(); # Contenedor total
-        plantilla2 = QVBoxLayout(); # Conjunto vertical de 3 colores
-        plantilla3 = QVBoxLayout(); # Unico color
-
-
+        plantilla1 = QHBoxLayout(); 
+        plantilla2 = QVBoxLayout(); 
+        plantilla3 = QVBoxLayout(); 
         
         plantilla2.addWidget(Color("red"))        
         plantilla2.addWidget(Color("yellow"))   
@@ -24,23 +19,17 @@ class MainWindow(QMainWindow): # Asi se crea una clase
         plantilla3.addWidget(Color("yellow"))   
         plantilla3.addWidget(Color("blue"))     
 
-      
-
         plantilla1.addLayout(plantilla2)
         plantilla1.addWidget(Color("Orange"))
         plantilla1.addLayout(plantilla3)
      
-
         widget = QWidget()
         widget.setLayout(plantilla1)
         self.setCentralWidget(widget)
-            
-             
-       
-           
+                
 app = QApplication([])
 window = MainWindow()
 window.show()
 
 
-app.exec() # Poner siempre si no la ventana se cierra instant
+app.exec() 

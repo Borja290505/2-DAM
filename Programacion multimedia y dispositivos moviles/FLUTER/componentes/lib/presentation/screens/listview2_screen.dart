@@ -20,7 +20,7 @@ class ListView2Screen extends StatelessWidget {
               },
               trailing: Icon(Icons.arrow_forward_ios_outlined),
             ),
-        separatorBuilder: (_, __ ) => Divider(), 
+        separatorBuilder: (_, _ ) => Divider(), 
         itemCount: games.length
       )
     );

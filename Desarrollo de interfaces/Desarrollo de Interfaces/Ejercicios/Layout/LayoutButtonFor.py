@@ -12,28 +12,29 @@ class MainWindow(QMainWindow): # Asi se crea una clase
 
         plantilla1 = QVBoxLayout(); # Contenedor total
        
-
+        #self.boton1 = QPushButton();
+        #self.boton2 = QPushButton();
+        #self.boton3 = QPushButton();
+#
+        #self.boton1.setText("Boton 1");
+        #self.boton2.setText("Boton 2");
+        #self.boton3.setText("Boton 3");
         
-        self.boton1 = QPushButton();
-        self.boton2 = QPushButton();
-        self.boton3 = QPushButton();
-
-        self.boton1.setText("Boton 1");
-        self.boton2.setText("Boton 2");
-        self.boton3.setText("Boton 3");
-        
-        plantilla1.setContentsMargins(10,10,10,10) # Para poner padding
+        #plantilla1.setContentsMargins(10,10,10,10) # Para poner padding
         plantilla1.setSpacing(40) # Para poner margen entre widgets
 
-        self.boton1.clicked.connect(self.botonClickeado)
-        self.boton2.clicked.connect(self.botonClickeado)
-        self.boton3.clicked.connect(self.botonClickeado)
+        #self.boton1.clicked.connect(self.botonClickeado)
+        #self.boton2.clicked.connect(self.botonClickeado)
+        #self.boton3.clicked.connect(self.botonClickeado)
         
+        #plantilla1.addWidget(self.boton1)
+        #plantilla1.addWidget(self.boton2)
+        #plantilla1.addWidget(self.boton3)
 
-       
-        plantilla1.addWidget(self.boton1)
-        plantilla1.addWidget(self.boton2)
-        plantilla1.addWidget(self.boton3)
+        for i in range(5):
+            boton = QPushButton(f"Botón {i+1}")
+            boton.clicked.connect(self.botonClickeado)
+            plantilla1.addWidget(boton)
 
         widget = QWidget()
         widget.setLayout(plantilla1)

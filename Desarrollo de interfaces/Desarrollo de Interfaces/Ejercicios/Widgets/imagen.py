@@ -11,7 +11,7 @@ class MainWindow(QMainWindow): # Asi se crea una clase
         self.setWindowTitle("MiAplicacion")
 
         label = QLabel()
-        label.setPixmap(QPixmap("Clase2/interfaces/img/remon1.jpg")) # Copiar ruta relativa y cambiar contrabarras por barras
+        label.setPixmap(QPixmap("Imagen/imagen.png")) # Copiar ruta relativa y cambiar contrabarras por barras
         label.setScaledContents(True) # Para escalar la imagen al zoom
     
         self.setCentralWidget(label)
