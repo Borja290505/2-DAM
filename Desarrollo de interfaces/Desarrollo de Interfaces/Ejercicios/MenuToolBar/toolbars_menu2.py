@@ -20,7 +20,6 @@ class MainWindow(QMainWindow): # Asi se crea una clase
         
         boton = QAction(QIcon("icons/bug.png"),"Mi boton", self)
         boton.setStatusTip("Este boton no hace nada") # Para que al hacer hover sobre el boton salga el tip (necesita lo de abajo tambien)
-        boton.triggered.connect(    )
 
         barra.addSeparator()
 
