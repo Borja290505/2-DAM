@@ -1,0 +1,71 @@
+QPushButton[text="ON"]{
+    border-style: solid;
+    border-width: 2px;
+    border-color: green;
+    border-radius: 5px;
+    color: white;
+    background-color: green;
+}
+
+QPushButton[text="OFF"]{
+    border-style: solid;
+    border-width: 2px;
+    border-color: RED;
+    border-radius: 5px;
+    color: white;
+    background-color: RED;
+}
+
+QPushButton[text="Conectar"]{
+    min-width: 50px;
+    min-height: 20px;
+    max-width: 100px;
+    max-height: 20px;
+    border-radius: 5px;
+    color: white;
+    background-color: lightgray;
+}
+
+QPushButton[text="Actualizar"]{
+    min-width: 50px;
+    min-height: 20px;
+    max-width: 100px;
+    max-height: 20px;
+    border-radius: 5px;
+    color: white;
+    background-color: lightgray;
+}
+
+QLabel{
+    min-width: 100px;
+    min-height: 20px;
+    max-width: 100px;
+    max-height: 20px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: lightgray;
+    background-color: lightgray;
+    text-align: center;
+}
+
+QLabel#label{
+    min-width: 250px;
+    min-height: 20px;
+    max-width: 100px;
+    max-height: 20px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: lightgray;
+    background-color: lightgray;
+    text-align: center;
+}
+
+.QWidget{
+    background-color: grey;
+    border-radius: 5px;
+}
+
+QComboBox{
+    background-color: lightgray;
+}
+
