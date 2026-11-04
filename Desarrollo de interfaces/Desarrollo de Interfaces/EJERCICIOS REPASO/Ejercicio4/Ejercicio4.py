@@ -39,7 +39,6 @@ class MainWindow(QMainWindow):
                 layoutH4.addWidget(self.boton)
 
     #<===================================================>
-
         botonIgual = QPushButton("=")
         botonIgual.pressed.connect(self.igual)
         layoutH4.addWidget(botonIgual)

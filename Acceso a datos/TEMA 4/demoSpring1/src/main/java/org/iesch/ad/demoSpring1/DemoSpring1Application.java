@@ -1,11 +1,10 @@
 package org.iesch.ad.demoSpring1;
 
 import org.iesch.ad.demoSpring1.modelo.Coche;
+import org.iesch.ad.demoSpring1.modelo.Curso;
 import org.iesch.ad.demoSpring1.modelo.Persona;
-import org.iesch.ad.demoSpring1.repositorio.CocheRepositorio;
-import org.iesch.ad.demoSpring1.repositorio.OrdenRepositorio;
-import org.iesch.ad.demoSpring1.repositorio.PersonaRepositorio;
-import org.iesch.ad.demoSpring1.repositorio.ClienteRepositorio;
+import org.iesch.ad.demoSpring1.modelo.Student;
+import org.iesch.ad.demoSpring1.repositorio.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -13,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.PropertySource;
 
 import java.util.Optional;
+import java.util.Set;
 
 @SpringBootApplication
 //@RequiredArgsConstructor
@@ -40,6 +40,12 @@ public class DemoSpring1Application implements CommandLineRunner {
 
 	@Autowired
 	OrdenRepositorio ordenRepositorio;
+
+	@Autowired
+	EstudianteRepositorio estudianteRepositorio;
+
+	@Autowired
+	CursoReporsitorio cursoReporsitorio;
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoSpring1Application.class, args);
@@ -189,24 +195,40 @@ public class DemoSpring1Application implements CommandLineRunner {
 		 */
 
 		System.out.println("Peta Bidireccional");
-		Optional<Persona> persona = personaRepositorio.findById(15L);
-		if (persona.isPresent()){
-			Persona persona1 = persona.get();
-			System.out.println(persona1);
-		}
+		/*
+			Optional<Persona> persona = personaRepositorio.findById(15L);
+			if (persona.isPresent()){
+				Persona persona1 = persona.get();
+				System.out.println(persona1);
+			}
 
-		Optional<Coche> coche = cocheRepositorio.findById(2L);
-		if (coche.isPresent()){
-			Coche coche1 = coche.get();
-			System.out.println(coche1);
-		}
+			Optional<Coche> coche = cocheRepositorio.findById(2L);
+			if (coche.isPresent()){
+				Coche coche1 = coche.get();
+				System.out.println(coche1);
+			}
+		 */
 
+		System.out.println("ManyToMany -> Unidireccional");
+		/*
+			Student student = new Student();
+			student.setNombre("Pepito Grillo");
 
+			Curso curso1 = new Curso();
+			curso1.setNombre("PHP");
 
+			Curso curso2 = new Curso();
+			curso2.setNombre("Spring");
 
+			Curso curso3 = new Curso();
+			curso3.setNombre("Python");
 
+			student.setCursos(Set.of(curso1,curso2,curso3));
 
-
+			estudianteRepositorio.save(student);
+		 */
+		System.out.println("ManyToMany -> Bidireccional");
+		
 	}
 
 }
