@@ -1,4 +1,4 @@
-from Ejercicio3 import Ui_MainWindow
+from Ejercicio3.Ejercicio3 import Ui_MainWindow
 from PyQt6.QtWidgets import QMainWindow, QApplication
 from PyQt6.QtGui import QPalette,QColor
 from PyQt6.QtCore import Qt

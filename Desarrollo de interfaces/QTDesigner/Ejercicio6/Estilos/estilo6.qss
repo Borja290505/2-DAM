@@ -1,0 +1,28 @@
+QPushButton[text="CE"]{
+    background-color: blue;
+}
+
+QPushButton[text="+"]{
+    background-color: blue;
+}
+
+QPushButton[text="="]{
+    background-color: blue;
+}
+
+QPushButton{
+    border-color: black;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 5px;
+    font-weight: bold;
+    background-color: white;
+}
+
+.QWidget{
+    background-color: grey;
+}
+
+QLabel{
+    background-color: white;
+}
