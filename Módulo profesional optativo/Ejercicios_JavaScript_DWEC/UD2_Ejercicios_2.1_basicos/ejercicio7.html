@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 7 - Número secreto</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+        .aviso { color: #b00020; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 7</h1>
+    <p class="enunciado">Script que pide al usuario un número. El cuadro de diálogo aparece una y otra vez
+        hasta que el usuario introduce el número elegido (en este caso, el 7).</p>
+
+    <script>
+        // Número que tiene que escribir el usuario para que deje de salir el cuadro de diálogo
+        const NUMERO_SECRETO = 7;
+
+        let intentos = 0;
+        let respuesta;
+        let mensaje = "Adivina el número secreto (está entre 1 y 10):";
+
+        // do...while: el cuadro se muestra al menos una vez y se repite
+        // MIENTRAS el número escrito no sea el número secreto.
+        // (Si el usuario pulsa Cancelar, prompt devuelve null y salimos para no dejarle atrapado)
+        do {
+            respuesta = prompt(mensaje);
+            intentos++;
+            mensaje = "«" + respuesta + "» no es el número secreto. Prueba otra vez (entre 1 y 10):";
+        } while (respuesta !== null && Number(respuesta) !== NUMERO_SECRETO);
+
+        if (respuesta === null) {
+            document.write("<p class='aviso'>Has cancelado sin encontrar el número secreto.</p>");
+        } else {
+            document.write("<p>¡Correcto! El número secreto era el <strong>" + NUMERO_SECRETO + "</strong>.</p>");
+            document.write("<p>Lo has conseguido en <strong>" + intentos + "</strong> " + (intentos === 1 ? "intento" : "intentos") + ".</p>");
+        }
+    </script>
+</body>
+</html>

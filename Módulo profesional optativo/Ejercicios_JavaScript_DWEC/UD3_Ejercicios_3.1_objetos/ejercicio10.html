@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 10 - Comprobar fecha sin Date</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+        .aviso { color: #b00020; }
+        .bien { color: #1b7f2a; font-weight: bold; }
+        .mal { color: #b00020; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 10</h1>
+    <p class="enunciado">Script que comprueba si una fecha en formato dd-mm-aaaa es correcta, sin usar el objeto Date.</p>
+
+    <script>
+        // Un año es bisiesto si es divisible entre 4 y no entre 100, o si es divisible entre 400
+        function esBisiesto(anyo) {
+            return (anyo % 4 === 0 && anyo % 100 !== 0) || anyo % 400 === 0;
+        }
+
+        // Días que tiene un mes (1-12) de un año
+        function diasDelMes(mes, anyo) {
+            switch (mes) {
+                case 2:
+                    return esBisiesto(anyo) ? 29 : 28;
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    return 30;
+                default:
+                    return 31;
+            }
+        }
+
+        // true si el texto solo tiene dígitos (0-9)
+        function soloDigitos(texto) {
+            for (let i = 0; i < texto.length; i++) {
+                let c = texto.charAt(i);
+                if (c < "0" || c > "9") {
+                    return false;
+                }
+            }
+            return texto.length > 0;
+        }
+
+        // Devuelve "" si la fecha es correcta, o un texto con el error
+        function errorEnFecha(texto) {
+            // Formato: 10 caracteres, con guiones en las posiciones 2 y 5 → dd-mm-aaaa
+            if (texto.length !== 10 || texto.charAt(2) !== "-" || texto.charAt(5) !== "-") {
+                return "el formato tiene que ser dd-mm-aaaa (por ejemplo 26-11-2015)";
+            }
+
+            let partes = texto.split("-");   // ["dd", "mm", "aaaa"]
+            if (!soloDigitos(partes[0]) || !soloDigitos(partes[1]) || !soloDigitos(partes[2])) {
+                return "el día, el mes y el año solo pueden tener números";
+            }
+
+            let dia = Number(partes[0]);
+            let mes = Number(partes[1]);
+            let anyo = Number(partes[2]);
+
+            if (anyo === 0) {
+                return "el año 0000 no existe";
+            }
+            if (mes < 1 || mes > 12) {
+                return "el mes tiene que estar entre 01 y 12";
+            }
+            let maximo = diasDelMes(mes, anyo);
+            if (dia < 1 || dia > maximo) {
+                return "el mes " + partes[1] + " del año " + anyo + " tiene " + maximo + " días";
+            }
+            return "";   // correcta
+        }
+
+        let fecha = prompt("Introduce una fecha con el formato dd-mm-aaaa:");
+
+        if (fecha === null) {
+            document.write("<p class='aviso'>Has cancelado. Recarga la página (F5) para empezar de nuevo.</p>");
+        } else {
+            fecha = fecha.trim();
+            let error = errorEnFecha(fecha);
+
+            if (error === "") {
+                document.write("<p>La fecha <strong>" + fecha + "</strong> <span class='bien'>es correcta</span>.</p>");
+            } else {
+                document.write("<p>La fecha <strong>" + fecha + "</strong> <span class='mal'>NO es correcta</span>: " + error + ".</p>");
+            }
+        }
+    </script>
+</body>
+</html>

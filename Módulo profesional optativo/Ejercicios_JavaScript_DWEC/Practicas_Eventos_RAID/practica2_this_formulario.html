@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Práctica 2 - this en atributos onfocus / onblur</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2em; }
+        label { display: block; margin-top: 1em; }
+        input { width: 260px; padding: 6px; font-size: 1em; border: 2px solid silver; outline: none; }
+    </style>
+</head>
+<body>
+    <h1>Práctica 2: <code>this</code> dentro de los atributos de evento</h1>
+    <p>Al entrar en una caja (onfocus) se pone el borde azul y el fondo amarillo claro.
+        Al salir (onblur) el borde se pone verde si tiene texto y rojo si está vacía.</p>
+
+    <!-- En un atributo de evento, "this" es el propio elemento (como en el ejemplo this2.html) -->
+    <label>Nombre:
+        <input type="text"
+               onfocus="this.style.borderColor='blue'; this.style.background='#fffbe0';"
+               onblur="this.style.background='white'; this.style.borderColor = (this.value === '') ? 'red' : 'green';">
+    </label>
+
+    <label>Apellidos:
+        <input type="text"
+               onfocus="this.style.borderColor='blue'; this.style.background='#fffbe0';"
+               onblur="this.style.background='white'; this.style.borderColor = (this.value === '') ? 'red' : 'green';">
+    </label>
+
+    <label>Correo:
+        <input type="email"
+               onfocus="this.style.borderColor='blue'; this.style.background='#fffbe0';"
+               onblur="this.style.background='white'; this.style.borderColor = (this.value === '') ? 'red' : 'green';">
+    </label>
+</body>
+</html>

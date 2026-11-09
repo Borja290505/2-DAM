@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3 - Array sin repetidos y ordenado</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 3</h1>
+    <p class="enunciado">Dado el array [4,0,3,4,7,3,5,8,1,8,8,0,2,3,1,2,5,7,3,2,5,1], genera un nuevo array
+        con los elementos originales sin repetir y ordenado.</p>
+
+    <script>
+        const numeros = [4, 0, 3, 4, 7, 3, 5, 8, 1, 8, 8, 0, 2, 3, 1, 2, 5, 7, 3, 2, 5, 1];
+
+        // 1. Quitamos los repetidos: recorremos el array original y solo añadimos
+        //    cada número al nuevo array si todavía no está en él (includes)
+        let sinRepetir = [];
+        for (let i = 0; i < numeros.length; i++) {
+            if (!sinRepetir.includes(numeros[i])) {
+                sinRepetir.push(numeros[i]);
+            }
+        }
+        // (Otra forma más corta: let sinRepetir = [...new Set(numeros)];)
+
+        // 2. Ordenamos de menor a mayor.
+        //    sort() sin parámetros ordena como si fueran textos ("10" iría antes que "2"),
+        //    por eso le pasamos una función que compara números: a - b
+        sinRepetir.sort(function (a, b) {
+            return a - b;
+        });
+
+        document.write("<p>Array original (" + numeros.length + " elementos):<br><strong>[" + numeros.join(", ") + "]</strong></p>");
+        document.write("<p>Array sin repetir y ordenado (" + sinRepetir.length + " elementos):<br><strong>[" + sinRepetir.join(", ") + "]</strong></p>");
+    </script>
+</body>
+</html>

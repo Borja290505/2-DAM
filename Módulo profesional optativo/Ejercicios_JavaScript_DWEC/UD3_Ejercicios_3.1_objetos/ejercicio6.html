@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 6 - Comprobar correo electrónico</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+        .aviso { color: #b00020; }
+        .bien { color: #1b7f2a; font-weight: bold; }
+        .mal { color: #b00020; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 6</h1>
+    <p class="enunciado">Script que comprueba si un correo electrónico es correcto
+        (por ejemplo <em>info@elcorreoelectronico.com</em>: nombre de usuario + @ + dominio)
+        y, si lo es, muestra el nombre de usuario y el nombre de dominio.</p>
+
+    <script>
+        // Comprueba un correo usando métodos de String.
+        // Devuelve "" si es correcto, o un texto explicando el error.
+        function errorEnCorreo(correo) {
+            if (correo === "") {
+                return "no has escrito nada";
+            }
+            if (correo.includes(" ")) {
+                return "no puede tener espacios";
+            }
+
+            // Tiene que haber UNA sola @
+            let posArroba = correo.indexOf("@");
+            if (posArroba === -1) {
+                return "le falta la @";
+            }
+            if (posArroba !== correo.lastIndexOf("@")) {
+                return "solo puede tener una @";
+            }
+
+            // Lo que hay antes de la @ es el usuario y lo que hay después, el dominio
+            let usuario = correo.substring(0, posArroba);
+            let dominio = correo.substring(posArroba + 1);
+
+            if (usuario === "") {
+                return "falta el nombre de usuario (lo que va antes de la @)";
+            }
+            if (dominio === "") {
+                return "falta el dominio (lo que va después de la @)";
+            }
+
+            // Usuario: letras, números y los signos . _ - +  (sin puntos al principio, al final ni seguidos)
+            if (!/^[a-z0-9._+-]+$/i.test(usuario)) {
+                return "el nombre de usuario tiene caracteres no permitidos";
+            }
+            if (usuario.startsWith(".") || usuario.endsWith(".") || usuario.includes("..")) {
+                return "el nombre de usuario tiene puntos mal colocados";
+            }
+
+            // Dominio = organización + "." + tipo (com, es, org...). El tipo va tras el ÚLTIMO punto.
+            let posPunto = dominio.lastIndexOf(".");
+            if (posPunto === -1) {
+                return "el dominio tiene que tener un punto (por ejemplo gmail.com)";
+            }
+            let organizacion = dominio.substring(0, posPunto);
+            let tipo = dominio.substring(posPunto + 1);
+
+            if (organizacion === "") {
+                return "falta la organización (lo que va entre la @ y el punto)";
+            }
+            if (!/^[a-z0-9.-]+$/i.test(organizacion)) {
+                return "la organización tiene caracteres no permitidos";
+            }
+            if (organizacion.startsWith(".") || organizacion.endsWith(".") || organizacion.includes("..") ||
+                organizacion.startsWith("-") || organizacion.endsWith("-")) {
+                return "la organización está mal escrita";
+            }
+            // El tipo solo puede tener letras, y al menos 2 (es, com, info...)
+            if (!/^[a-z]{2,}$/i.test(tipo)) {
+                return "el tipo (lo que va tras el último punto) tiene que tener al menos 2 letras";
+            }
+
+            return "";   // todo correcto
+        }
+
+        let correo = prompt("Introduce un correo electrónico:");
+
+        if (correo === null) {
+            document.write("<p class='aviso'>Has cancelado. Recarga la página (F5) para empezar de nuevo.</p>");
+        } else {
+            correo = correo.trim();
+            let error = errorEnCorreo(correo);
+
+            if (error !== "") {
+                document.write("<p>El correo <strong>" + correo + "</strong> <span class='mal'>NO es correcto</span>: " + error + ".</p>");
+            } else {
+                // Como ya sabemos que es correcto, lo partimos en sus trozos
+                let posArroba = correo.indexOf("@");
+                let usuario = correo.substring(0, posArroba);
+                let dominio = correo.substring(posArroba + 1);
+                let posPunto = dominio.lastIndexOf(".");
+
+                document.write("<p>El correo <strong>" + correo + "</strong> <span class='bien'>es correcto</span>.</p>");
+                document.write("<ul>");
+                document.write("<li>Nombre de usuario: <strong>" + usuario + "</strong></li>");
+                document.write("<li>Nombre de dominio: <strong>" + dominio + "</strong>");
+                document.write("<ul><li>Organización: " + dominio.substring(0, posPunto) + "</li>");
+                document.write("<li>Tipo: " + dominio.substring(posPunto + 1) + "</li></ul></li>");
+                document.write("</ul>");
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 8 - Apellidos, nombre</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+        .aviso { color: #b00020; }
+        .resultado { font-size: 1.4em; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 8</h1>
+    <p class="enunciado">Script que pide el nombre y los apellidos de una persona (en una sola vez)
+        y los muestra como "apellidos, nombre".</p>
+
+    <script>
+        // Divide un texto en palabras, quitando los espacios que sobren
+        function separarPalabras(texto) {
+            return texto.trim().split(" ").filter(function (palabra) {
+                return palabra !== "";
+            });
+        }
+
+        let texto = prompt("Escribe tu nombre y apellidos (por ejemplo: Ana García López):");
+
+        // Necesitamos al menos dos palabras (nombre y un apellido)
+        while (texto !== null && separarPalabras(texto).length < 2) {
+            texto = prompt("Necesito al menos un nombre y un apellido.\nEscribe tu nombre y apellidos:");
+        }
+
+        if (texto === null) {
+            document.write("<p class='aviso'>Has cancelado. Recarga la página (F5) para empezar de nuevo.</p>");
+        } else {
+            let palabras = separarPalabras(texto);
+            let nombre;
+            let apellidos;
+
+            if (palabras.length === 2) {
+                // "Nombre Apellido"
+                nombre = palabras[0];
+                apellidos = palabras[1];
+            } else {
+                // En España solemos tener dos apellidos: las dos últimas palabras son los apellidos
+                // y todo lo anterior es el nombre (así también vale para nombres compuestos: "José Luis García López")
+                apellidos = palabras.slice(-2).join(" ");
+                nombre = palabras.slice(0, -2).join(" ");
+            }
+
+            document.write("<p>Has escrito: " + palabras.join(" ") + "</p>");
+            document.write("<p class='resultado'>" + apellidos + ", " + nombre + "</p>");
+        }
+    </script>
+</body>
+</html>

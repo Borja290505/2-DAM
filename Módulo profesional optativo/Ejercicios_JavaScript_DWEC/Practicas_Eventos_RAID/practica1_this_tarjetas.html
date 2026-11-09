@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Práctica 1 - this: seleccionar tarjetas</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2em; }
+        .tarjeta {
+            width: 140px; height: 90px; margin: 8px; display: inline-block;
+            background: #e3ecf7; border: 3px solid #9bb6d8; border-radius: 8px;
+            text-align: center; line-height: 90px; font-size: 22px; cursor: pointer;
+        }
+        .seleccionada { background: #f0db4f; border-color: #b59a00; }
+        #info { font-size: 1.2em; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Práctica 1: seleccionar tarjetas con <code>this</code></h1>
+    <p>Haz clic en las tarjetas para seleccionarlas o deseleccionarlas.</p>
+
+    <div class="tarjeta">HTML</div>
+    <div class="tarjeta">CSS</div>
+    <div class="tarjeta">JavaScript</div>
+    <div class="tarjeta">PHP</div>
+    <div class="tarjeta">Java</div>
+    <div class="tarjeta">SQL</div>
+
+    <p id="info">Seleccionadas: ninguna</p>
+
+    <script>
+        // Dentro de la función manejadora, "this" es el elemento sobre el que se ha hecho clic.
+        // Así UNA sola función vale para todas las tarjetas.
+        function seleccionar() {
+            this.classList.toggle("seleccionada");   // pone o quita la clase
+            actualizarInfo();
+        }
+
+        // Escribe los nombres de las tarjetas seleccionadas
+        function actualizarInfo() {
+            var seleccionadas = document.getElementsByClassName("seleccionada");
+            var nombres = [];
+            for (var i = 0; i < seleccionadas.length; i++) {
+                nombres.push(seleccionadas[i].textContent);
+            }
+            document.getElementById("info").textContent =
+                "Seleccionadas: " + (nombres.length === 0 ? "ninguna" : nombres.join(", "));
+        }
+
+        // Asignamos la misma función a todas las tarjetas
+        var tarjetas = document.getElementsByClassName("tarjeta");
+        for (var i = 0; i < tarjetas.length; i++) {
+            tarjetas[i].addEventListener("click", seleccionar);
+        }
+    </script>
+</body>
+</html>

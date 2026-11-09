@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 9 - Bola de papel y papelera</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+        button { font-size: 1.1em; padding: 0.4em 1.2em; cursor: pointer; }
+
+        .escena {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            max-width: 650px;
+            padding: 2em;
+            margin: 1.5em 0;
+            background: #fafafa;
+            border: 1px dashed #bbb;
+        }
+        #bola { cursor: grab; }
+        #papelera { border-radius: 12px; transition: background-color 0.2s; }
+        #papelera.encima { background: #d9f2dd; }   /* cuando la bola está encima de la papelera */
+        #mensaje { font-size: 1.2em; font-weight: bold; }
+    </style>
+    <script src="ejercicio9.js" defer></script>
+</head>
+<body>
+    <h1>Ejercicio 9</h1>
+    <p class="enunciado">Hay una bola de papel y una papelera vacía. Al arrastrar la bola de papel hasta la papelera,
+        la imagen de la papelera vacía cambia por la de una papelera llena.</p>
+
+    <div class="escena">
+        <img id="bola" src="img/bola_papel.svg" alt="Bola de papel" width="110" height="110" draggable="true">
+        <img id="papelera" src="img/papelera_vacia.svg" alt="Papelera vacía" width="160" height="200" draggable="false">
+    </div>
+
+    <p id="mensaje">Arrastra la bola de papel hasta la papelera.</p>
+    <button id="reiniciar">Volver a empezar</button>
+</body>
+</html>

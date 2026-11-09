@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 14 - Figura descendente</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+        .aviso { color: #b00020; }
+        pre { font-size: 1.6em; line-height: 1.3; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 14</h1>
+    <div class="enunciado">
+        <p>Script que pide un número y muestra esta estructura hasta el número correspondiente.
+            Ejemplo para el 5:</p>
+        <pre style="font-size: 1em">55555
+*4444
+**333
+***22
+****1</pre>
+    </div>
+
+    <script>
+        // Pide un número entero entre minimo y maximo (incluidos).
+        // Si no es válido lo vuelve a pedir. Devuelve null si el usuario pulsa "Cancelar".
+        function pedirEntero(mensaje, minimo, maximo) {
+            let texto = prompt(mensaje);
+            while (texto !== null) {
+                let numero = Number(texto);
+                if (texto.trim() !== "" && Number.isInteger(numero) && numero >= minimo && numero <= maximo) {
+                    return numero;
+                }
+                texto = prompt("«" + texto + "» no es válido.\n" + mensaje);
+            }
+            return null;
+        }
+
+        // Números de una cifra para que la figura quede bien alineada
+        let numero = pedirEntero("Introduce un número del 1 al 9:", 1, 9);
+
+        if (numero === null) {
+            document.write("<p class='aviso'>Has cancelado. Recarga la página (F5) para empezar de nuevo.</p>");
+        } else {
+            let figura = "";
+
+            // En cada fila: tantos asteriscos como el número de fila (empezando en 0)
+            // y después el valor de la fila repetido tantas veces como vale (5, 4, 3...)
+            for (let fila = 0; fila < numero; fila++) {
+                let valor = numero - fila;
+                let linea = "";
+
+                for (let i = 0; i < fila; i++) {
+                    linea += "*";
+                }
+                for (let i = 0; i < valor; i++) {
+                    linea += valor;
+                }
+
+                figura += linea + "\n";
+            }
+
+            document.write("<p>Número introducido: <strong>" + numero + "</strong></p>");
+            document.write("<pre>" + figura + "</pre>");
+        }
+    </script>
+</body>
+</html>

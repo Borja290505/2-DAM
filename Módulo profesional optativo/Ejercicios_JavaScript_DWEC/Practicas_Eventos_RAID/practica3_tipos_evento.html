@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Práctica 3 - Una función para varios tipos de evento</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2em; }
+        #caja {
+            width: 220px; height: 100px; background: green; color: white;
+            border: 3px solid silver; text-align: center; line-height: 100px;
+            font-size: 1.3em; user-select: none; cursor: pointer;
+        }
+        #registro { font-family: monospace; background: #f4f4f4; padding: 1em; min-height: 8em; }
+    </style>
+</head>
+<body>
+    <h1>Práctica 3: una sola función para varios tipos de evento</h1>
+    <p>Pasa el ratón, haz clic o doble clic en la caja, o pulsa teclas.
+        La misma función mira <code>evento.type</code> para saber qué ha pasado.</p>
+
+    <div id="caja">Caja</div>
+    <h2>Registro de eventos</h2>
+    <div id="registro"></div>
+
+    <script>
+        var caja = document.getElementById("caja");
+        var registro = document.getElementById("registro");
+
+        // Añade una línea al principio del registro (y también a la consola, como en el ejemplo de clase)
+        function anotar(texto) {
+            console.log(texto);
+            registro.innerHTML = texto + "<br>" + registro.innerHTML;
+        }
+
+        // El navegador le pasa a la función el objeto evento, con el tipo y más datos
+        function gestionarEvento(evento) {
+            switch (evento.type) {
+                case "click":
+                    anotar("click en X=" + evento.clientX + " Y=" + evento.clientY);
+                    break;
+                case "dblclick":
+                    caja.style.background = (caja.style.background === "orange") ? "green" : "orange";
+                    anotar("dblclick: cambio el color de la caja");
+                    break;
+                case "mouseover":
+                    caja.style.borderColor = "black";
+                    anotar("mouseover: el ratón entra en la caja");
+                    break;
+                case "mouseout":
+                    caja.style.borderColor = "silver";
+                    anotar("mouseout: el ratón sale de la caja");
+                    break;
+                case "keyup":
+                    anotar("keyup: tecla «" + evento.key + "» (keyCode " + evento.keyCode + ")");
+                    break;
+            }
+        }
+
+        // La misma función para todos los eventos (asignados con las propiedades on...)
+        caja.onclick = gestionarEvento;
+        caja.ondblclick = gestionarEvento;
+        caja.onmouseover = gestionarEvento;
+        caja.onmouseout = gestionarEvento;
+        document.onkeyup = gestionarEvento;
+    </script>
+</body>
+</html>

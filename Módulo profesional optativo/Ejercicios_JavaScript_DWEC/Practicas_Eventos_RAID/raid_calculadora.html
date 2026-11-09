@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora RAID 0 / RAID 1</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        fieldset { display: inline-block; border: 1px solid #ccc; padding: 0.8em 1.5em; margin-right: 1em; vertical-align: top; }
+        input[type=number] { width: 90px; font-size: 1em; padding: 4px; }
+        select { font-size: 1em; padding: 4px; }
+        #error { color: #b00020; font-weight: bold; }
+
+        #discos { margin: 1.5em 0; }
+        .disco {
+            display: inline-block; width: 90px; margin: 5px; padding: 10px 0;
+            border: 2px solid #46525e; border-radius: 10px; text-align: center; color: white; font-size: 0.9em;
+        }
+        .datos { background: #226fc1; }    /* RAID 0: cada disco guarda una parte distinta */
+        .espejo { background: #2a9d8f; }   /* RAID 1: todos guardan lo mismo */
+
+        table { border-collapse: collapse; }
+        th, td { border: 1px solid #999; padding: 6px 14px; text-align: left; }
+        th { background: #f0db4f; }
+        .elegido { background: #fff6c2; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Calculadora RAID 0 / RAID 1</h1>
+    <p>Elige el tipo de RAID, cuántos discos y la capacidad de cada disco (todos iguales).
+        Los resultados se actualizan solos al cambiar cualquier dato.</p>
+
+    <fieldset>
+        <legend>Tipo de RAID</legend>
+        <label><input type="radio" name="raid" value="0" checked> RAID 0 (striping)</label><br>
+        <label><input type="radio" name="raid" value="1"> RAID 1 (espejo)</label>
+    </fieldset>
+
+    <fieldset>
+        <legend>Discos</legend>
+        <label>Número de discos:
+            <select id="numDiscos">
+                <option>2</option><option>3</option><option>4</option>
+                <option>5</option><option>6</option><option>7</option><option>8</option>
+            </select>
+        </label><br><br>
+        <label>Capacidad de cada disco:
+            <input type="number" id="capacidad" value="500" min="1" step="any">
+            <select id="unidad">
+                <option value="GB" selected>GB</option>
+                <option value="TB">TB</option>
+            </select>
+        </label>
+    </fieldset>
+
+    <p id="error"></p>
+
+    <div id="discos"></div>
+
+    <h2 id="titulo"></h2>
+    <p id="resumen"></p>
+
+    <h2>Comparación de los dos casos</h2>
+    <table>
+        <thead>
+            <tr><th></th><th>RAID 0</th><th>RAID 1</th></tr>
+        </thead>
+        <tbody id="comparacion"></tbody>
+    </table>
+
+    <script>
+        // Elementos del formulario
+        var numDiscos = document.getElementById("numDiscos");
+        var capacidad = document.getElementById("capacidad");
+        var unidad = document.getElementById("unidad");
+        var radios = document.getElementsByName("raid");
+
+        // Devuelve "0" o "1" según el radio que esté marcado
+        function raidElegido() {
+            for (var i = 0; i < radios.length; i++) {
+                if (radios[i].checked) {
+                    return radios[i].value;
+                }
+            }
+        }
+
+        // Escribe una cantidad en GB de forma bonita: 1500 GB → "1,5 TB"
+        function formato(gb) {
+            var texto;
+            if (gb >= 1000) {
+                texto = (gb / 1000).toLocaleString("es-ES", { maximumFractionDigits: 2 }) + " TB";
+            } else {
+                texto = gb.toLocaleString("es-ES", { maximumFractionDigits: 2 }) + " GB";
+            }
+            return texto;
+        }
+
+        // Calcula los datos de un tipo de RAID con n discos de "cap" GB cada uno
+        function calcular(tipo, n, cap) {
+            var total = n * cap;   // suma de todos los discos (capacidad bruta)
+            if (tipo === "0") {
+                // RAID 0: los datos se reparten entre todos los discos → se aprovecha todo el espacio,
+                // pero si falla UN disco se pierden todos los datos
+                return {
+                    util: total,
+                    perdido: 0,
+                    fallos: "Ninguno: si falla 1 disco se pierde todo",
+                    velocidad: "Lectura y escritura hasta " + n + " veces más rápidas"
+                };
+            } else {
+                // RAID 1: todos los discos tienen una copia exacta (espejo) → solo se aprovecha UN disco,
+                // pero funciona mientras quede uno sano
+                return {
+                    util: cap,
+                    perdido: total - cap,
+                    fallos: "Aguanta que fallen " + (n - 1) + " de " + n + " discos",
+                    velocidad: "Lectura hasta " + n + " veces más rápida; escritura como un solo disco"
+                };
+            }
+        }
+
+        // Se ejecuta cada vez que cambia cualquier dato
+        function actualizar() {
+            var n = Number(numDiscos.value);
+            var cap = Number(capacidad.value);
+            var tipo = raidElegido();
+
+            // Validación de la capacidad
+            if (capacidad.value === "" || isNaN(cap) || cap <= 0) {
+                document.getElementById("error").textContent = "La capacidad tiene que ser un número mayor que 0.";
+                return;
+            }
+            document.getElementById("error").textContent = "";
+
+            // Pasamos todo a GB para calcular
+            if (unidad.value === "TB") {
+                cap = cap * 1000;
+            }
+
+            var r = calcular(tipo, n, cap);
+
+            // ----- Dibujo de los discos -----
+            var html = "";
+            for (var i = 1; i <= n; i++) {
+                if (tipo === "0") {
+                    html += "<div class='disco datos'>Disco " + i + "<br>" + formato(cap) + "<br>parte " + i + "</div>";
+                } else {
+                    html += "<div class='disco espejo'>Disco " + i + "<br>" + formato(cap) + "<br>" +
+                            (i === 1 ? "original" : "copia") + "</div>";
+                }
+            }
+            document.getElementById("discos").innerHTML = html;
+
+            // ----- Resultado del RAID elegido -----
+            document.getElementById("titulo").textContent =
+                "RAID " + tipo + " con " + n + " discos de " + formato(cap) + ": tendrías " + formato(r.util);
+            document.getElementById("resumen").innerHTML =
+                "Capacidad total de los discos: " + formato(n * cap) + "<br>" +
+                "Espacio útil: <strong>" + formato(r.util) + "</strong> (" + Math.round(r.util / (n * cap) * 100) + " %)<br>" +
+                "Espacio que no se puede usar para datos: " + formato(r.perdido) + "<br>" +
+                "Tolerancia a fallos: " + r.fallos + "<br>" +
+                "Rendimiento: " + r.velocidad;
+
+            // ----- Tabla comparando los dos casos -----
+            var r0 = calcular("0", n, cap);
+            var r1 = calcular("1", n, cap);
+            var clase0 = (tipo === "0") ? " class='elegido'" : "";
+            var clase1 = (tipo === "1") ? " class='elegido'" : "";
+            var filas = [
+                ["Espacio útil", formato(r0.util), formato(r1.util)],
+                ["Espacio perdido", formato(r0.perdido), formato(r1.perdido)],
+                ["Tolerancia a fallos", r0.fallos, r1.fallos],
+                ["Rendimiento", r0.velocidad, r1.velocidad]
+            ];
+            var tabla = "";
+            for (var j = 0; j < filas.length; j++) {
+                tabla += "<tr><th>" + filas[j][0] + "</th><td" + clase0 + ">" + filas[j][1] +
+                         "</td><td" + clase1 + ">" + filas[j][2] + "</td></tr>";
+            }
+            document.getElementById("comparacion").innerHTML = tabla;
+        }
+
+        // ----- Eventos: cualquier cambio recalcula -----
+        for (var k = 0; k < radios.length; k++) {
+            radios[k].addEventListener("change", actualizar);
+        }
+        numDiscos.addEventListener("change", actualizar);
+        unidad.addEventListener("change", actualizar);
+        capacidad.addEventListener("input", actualizar);   // "input" salta con cada tecla
+
+        actualizar();   // primer cálculo al cargar la página
+    </script>
+</body>
+</html>

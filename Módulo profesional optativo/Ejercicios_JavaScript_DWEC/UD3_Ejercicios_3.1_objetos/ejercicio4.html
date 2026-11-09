@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 4 - Ordenar nombres</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+        .columnas { display: flex; gap: 4em; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 4</h1>
+    <p class="enunciado">Genera un array con los nombres Julián, Rodrigo, Mateo y Valdomero y los ordena
+        en orden normal e inverso.</p>
+
+    <script>
+        const nombres = ["Julián", "Rodrigo", "Mateo", "Valdomero"];
+
+        // sort() cambia el array sobre el que se usa, así que trabajamos con copias (slice() hace una copia).
+        // localeCompare compara textos en español (tiene en cuenta tildes, ñ...)
+        let ordenNormal = nombres.slice().sort(function (a, b) {
+            return a.localeCompare(b, "es");
+        });
+
+        // Orden inverso: el orden normal dado la vuelta con reverse()
+        let ordenInverso = ordenNormal.slice().reverse();
+
+        // Escribe un array como lista numerada
+        function lista(array) {
+            let html = "<ol>";
+            for (let i = 0; i < array.length; i++) {
+                html += "<li>" + array[i] + "</li>";
+            }
+            return html + "</ol>";
+        }
+
+        document.write("<div class='columnas'>");
+        document.write("<div><h2>Original</h2>" + lista(nombres) + "</div>");
+        document.write("<div><h2>Orden normal (A → Z)</h2>" + lista(ordenNormal) + "</div>");
+        document.write("<div><h2>Orden inverso (Z → A)</h2>" + lista(ordenInverso) + "</div>");
+        document.write("</div>");
+    </script>
+</body>
+</html>

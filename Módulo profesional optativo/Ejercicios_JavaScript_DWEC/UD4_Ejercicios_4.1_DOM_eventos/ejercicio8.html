@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 8 - Fondo aleatorio con doble clic</title>
+    <style>
+        html, body { min-height: 100%; }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 2em;
+            min-height: 100vh;
+            box-sizing: border-box;
+            line-height: 1.5;
+            user-select: none;                     /* que el doble clic no seleccione texto */
+            transition: background-color 0.3s;     /* cambio de color suave */
+        }
+        .enunciado { background: rgba(255, 255, 255, 0.85); color: #000; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+        #color { font-size: 1.6em; font-weight: bold; margin-top: 1.5em; }
+    </style>
+    <script src="ejercicio8.js" defer></script>
+</head>
+<body>
+    <h1>Ejercicio 8</h1>
+    <p class="enunciado">Al hacer doble clic en cualquier parte de la ventana del navegador,
+        el fondo cambia a un color aleatorio.</p>
+
+    <p id="color">Haz doble clic en cualquier sitio</p>
+</body>
+</html>

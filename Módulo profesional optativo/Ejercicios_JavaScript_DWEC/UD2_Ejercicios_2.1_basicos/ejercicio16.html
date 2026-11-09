@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 16 - Rectángulo</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+        .aviso { color: #b00020; }
+        pre { font-size: 1.6em; line-height: 1.2; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 16</h1>
+    <div class="enunciado">
+        <p>Script que, dados el alto y el ancho, dibuja un rectángulo. El carácter del borde y el del relleno
+            también los elige el usuario. Ejemplo: alto = 4, ancho = 6, borde = '%', relleno = '&amp;'</p>
+        <pre style="font-size: 1em">%%%%%%
+%&amp;&amp;&amp;&amp;%
+%&amp;&amp;&amp;&amp;%
+%%%%%%</pre>
+    </div>
+
+    <script>
+        // Pide un número entero entre minimo y maximo (incluidos).
+        // Si no es válido lo vuelve a pedir. Devuelve null si el usuario pulsa "Cancelar".
+        function pedirEntero(mensaje, minimo, maximo) {
+            let texto = prompt(mensaje);
+            while (texto !== null) {
+                let numero = Number(texto);
+                if (texto.trim() !== "" && Number.isInteger(numero) && numero >= minimo && numero <= maximo) {
+                    return numero;
+                }
+                texto = prompt("«" + texto + "» no es válido.\n" + mensaje);
+            }
+            return null;
+        }
+
+        // Pide UN solo carácter. Devuelve null si el usuario pulsa "Cancelar".
+        function pedirCaracter(mensaje) {
+            let texto = prompt(mensaje);
+            while (texto !== null && texto.length !== 1) {
+                texto = prompt("Tiene que ser UN solo carácter.\n" + mensaje);
+            }
+            return texto;
+        }
+
+        // Los caracteres < > & tienen significado en HTML: los cambiamos por su entidad
+        // para que se vean tal cual en la página
+        function escaparHTML(caracter) {
+            if (caracter === "<") {
+                return "&lt;";
+            } else if (caracter === ">") {
+                return "&gt;";
+            } else if (caracter === "&") {
+                return "&amp;";
+            }
+            return caracter;
+        }
+
+        // Pide los datos y dibuja el rectángulo. Devuelve false si el usuario cancela.
+        function dibujarRectangulo() {
+            let alto = pedirEntero("Alto del rectángulo (de 1 a 50):", 1, 50);
+            if (alto === null) {
+                return false;
+            }
+            let ancho = pedirEntero("Ancho del rectángulo (de 1 a 50):", 1, 50);
+            if (ancho === null) {
+                return false;
+            }
+            let borde = pedirCaracter("Carácter para el BORDE:");
+            if (borde === null) {
+                return false;
+            }
+            let relleno = pedirCaracter("Carácter para el RELLENO:");
+            if (relleno === null) {
+                return false;
+            }
+
+            let rectangulo = "";
+
+            for (let fila = 1; fila <= alto; fila++) {
+                for (let columna = 1; columna <= ancho; columna++) {
+                    // Es borde si está en la primera o última fila, o en la primera o última columna
+                    if (fila === 1 || fila === alto || columna === 1 || columna === ancho) {
+                        rectangulo += escaparHTML(borde);
+                    } else {
+                        rectangulo += escaparHTML(relleno);
+                    }
+                }
+                rectangulo += "\n";   // salto de línea al final de cada fila
+            }
+
+            document.write("<p>Alto = " + alto + ", ancho = " + ancho +
+                           ", borde = '" + escaparHTML(borde) + "', relleno = '" + escaparHTML(relleno) + "'</p>");
+            // <pre> respeta los saltos de línea y usa letra de ancho fijo
+            // (hace lo mismo que <tt>, que está obsoleta en HTML5)
+            document.write("<pre>" + rectangulo + "</pre>");
+            return true;
+        }
+
+        if (!dibujarRectangulo()) {
+            document.write("<p class='aviso'>Has cancelado. Recarga la página (F5) para empezar de nuevo.</p>");
+        }
+    </script>
+</body>
+</html>

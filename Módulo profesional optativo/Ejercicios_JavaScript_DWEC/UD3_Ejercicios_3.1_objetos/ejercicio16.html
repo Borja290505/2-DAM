@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 16 - Horario 2º DAM</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+
+        /* Estilo parecido al de la imagen del enunciado */
+        .titulo-horario { font-family: "Times New Roman", serif; font-size: 2.4em; margin: 0.5em 0; }
+        .horario { border-collapse: collapse; font-family: "Times New Roman", serif; font-size: 1.2em; }
+        .horario th, .horario td { border: 2px solid green; padding: 2px 10px; text-align: center; min-width: 120px; }
+        .horario th { font-weight: normal; }
+        .horario .fecha { font-size: 0.7em; color: #666; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 16</h1>
+    <div class="enunciado">
+        <p>Script que genera el horario de 2º DAM:</p>
+        <ul>
+            <li>Un array bidimensional guarda solo las asignaturas (sin horas ni días).</li>
+            <li>Se usan objetos Date para mostrar los días y las horas.</li>
+            <li>Las horas de la primera columna se calculan.</li>
+        </ul>
+    </div>
+
+    <script>
+        // ===== Datos: SOLO las asignaturas (sin horas ni días) =====
+        let horario = [
+            ["IPPE", "PROY", "IPPE", "AD", "SGE"],
+            ["DI", "SGE", "AD", "AD", "SGE"],
+            ["DI", "SGE", "AD", "AD", "SASP"],
+            ["RECREO", "RECREO", "RECREO", "RECREO", "RECREO"],
+            ["DWC", "PMDM", "PMDM", "PROY", "DI"],
+            ["DWC", "PMDM", "PMDM", "PSP", "DI"],
+            ["DWC", "PMDM", "PMDM", "PSP", "DI"]
+        ];
+
+        // ===== Datos para calcular las horas =====
+        const HORA_INICIO = 15;
+        const MINUTO_INICIO = 45;
+        const DURACION_CLASE = 50;     // minutos
+        const DURACION_RECREO = 15;    // minutos
+        const CAMBIO_DE_CLASE = 5;     // minutos entre dos clases seguidas (antes y después del recreo no hay)
+
+        // Devuelve un Date nuevo sumando unos minutos a otro Date
+        function sumarMinutos(fecha, minutos) {
+            return new Date(fecha.getTime() + minutos * 60 * 1000);
+        }
+
+        // Añade un 0 delante si el número tiene una sola cifra: 5 → "05"
+        function dosCifras(numero) {
+            return String(numero).padStart(2, "0");
+        }
+
+        // "hh:mm" de un Date
+        function formatoHora(fecha) {
+            return dosCifras(fecha.getHours()) + ":" + dosCifras(fecha.getMinutes());
+        }
+
+        // "dd-mm-aaaa" de un Date
+        function formatoFecha(fecha) {
+            return dosCifras(fecha.getDate()) + "-" + dosCifras(fecha.getMonth() + 1) + "-" + fecha.getFullYear();
+        }
+
+        function esRecreo(fila) {
+            return fila[0] === "RECREO";
+        }
+
+        // ===== Cabecera: los días de la semana, sacados con objetos Date =====
+        // Buscamos el lunes de esta semana (si hoy es sábado o domingo, el de la semana que viene)
+        let lunes = new Date();
+        let diaSemana = lunes.getDay();   // 0 = domingo ... 6 = sábado
+        if (diaSemana === 0) {
+            lunes.setDate(lunes.getDate() + 1);
+        } else if (diaSemana === 6) {
+            lunes.setDate(lunes.getDate() + 2);
+        } else {
+            lunes.setDate(lunes.getDate() - (diaSemana - 1));
+        }
+
+        let html = "<table class='horario'><tr><th></th>";
+        for (let i = 0; i < horario[0].length; i++) {
+            let dia = new Date(lunes);
+            dia.setDate(lunes.getDate() + i);   // lunes + 0, +1, +2...
+
+            // toLocaleDateString nos da el nombre del día en español ("lunes"); ponemos la primera en mayúscula
+            let nombre = dia.toLocaleDateString("es-ES", { weekday: "long" });
+            nombre = nombre.charAt(0).toUpperCase() + nombre.slice(1);
+
+            html += "<th>" + nombre + "<br><span class='fecha'>" + formatoFecha(dia) + "</span></th>";
+        }
+        html += "</tr>";
+
+        // ===== Filas: hora calculada + asignaturas =====
+        let inicio = new Date();
+        inicio.setHours(HORA_INICIO, MINUTO_INICIO, 0, 0);   // 15:45
+
+        for (let i = 0; i < horario.length; i++) {
+            let duracion = esRecreo(horario[i]) ? DURACION_RECREO : DURACION_CLASE;
+            let fin = sumarMinutos(inicio, duracion);
+
+            // Primera columna: franja horaria calculada
+            html += "<tr><td>" + formatoHora(inicio) + "-" + formatoHora(fin) + "</td>";
+
+            // Resto de columnas: las asignaturas de esa fila
+            for (let j = 0; j < horario[i].length; j++) {
+                html += "<td>" + horario[i][j] + "</td>";
+            }
+            html += "</tr>";
+
+            // La siguiente franja empieza cuando acaba esta, más 5 minutos si son dos clases seguidas
+            let siguienteEsRecreo = (i + 1 < horario.length) && esRecreo(horario[i + 1]);
+            if (esRecreo(horario[i]) || siguienteEsRecreo) {
+                inicio = fin;
+            } else {
+                inicio = sumarMinutos(fin, CAMBIO_DE_CLASE);
+            }
+        }
+        html += "</table>";
+
+        document.write("<p class='titulo-horario'>Horario 2º DAM</p>");
+        document.write(html);
+    </script>
+</body>
+</html>

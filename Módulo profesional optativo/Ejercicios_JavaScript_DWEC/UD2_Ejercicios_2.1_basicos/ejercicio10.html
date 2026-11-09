@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 10 - Billete de autobús</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+        .aviso { color: #b00020; }
+        table { border-collapse: collapse; min-width: 340px; }
+        td { border: 1px solid #ccc; padding: 6px 12px; }
+        td:last-child { text-align: right; white-space: nowrap; }
+        .total td { font-weight: bold; background: #f0db4f; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 10</h1>
+    <div class="enunciado">
+        <p>Calcula el precio de un billete de autobús, IVA incluido:</p>
+        <ul>
+            <li>Pide nombre, edad y día de la semana en el que se quiere viajar.</li>
+            <li>Entre 18 y 26 años o mayor de 60: 15 % de descuento.</li>
+            <li>Si viaja miércoles o viernes, además, otro 5 % de descuento.</li>
+            <li>El billete simple cuesta 12,50 € SIN IVA.</li>
+            <li>Muestra el motivo del descuento y un resumen del precio con IVA y sin IVA.</li>
+        </ul>
+    </div>
+
+    <script>
+        // ===== Datos del problema =====
+        const PRECIO_BASE = 12.5;   // precio del billete simple SIN IVA
+        const IVA = 21;             // % de IVA
+        const DTO_EDAD = 15;        // % de descuento por edad
+        const DTO_DIA = 5;          // % de descuento por viajar en miércoles o viernes
+
+        // Pide un número entero entre minimo y maximo (incluidos).
+        // Si no es válido lo vuelve a pedir. Devuelve null si el usuario pulsa "Cancelar".
+        function pedirEntero(mensaje, minimo, maximo) {
+            let texto = prompt(mensaje);
+            while (texto !== null) {
+                let numero = Number(texto);
+                if (texto.trim() !== "" && Number.isInteger(numero) && numero >= minimo && numero <= maximo) {
+                    return numero;
+                }
+                texto = prompt("«" + texto + "» no es válido.\n" + mensaje);
+            }
+            return null;
+        }
+
+        // Pide el día de la semana hasta que sea uno válido.
+        // Lo devuelve en minúsculas y con tilde ("miércoles"), o null si el usuario pulsa "Cancelar".
+        function pedirDia() {
+            let mensaje = "¿Qué día de la semana quieres viajar?";
+            while (true) {
+                let texto = prompt(mensaje);
+                if (texto === null) {
+                    return null;
+                }
+                // Aceptamos el día con o sin tilde y en mayúsculas o minúsculas
+                switch (texto.trim().toLowerCase()) {
+                    case "lunes":
+                        return "lunes";
+                    case "martes":
+                        return "martes";
+                    case "miércoles":
+                    case "miercoles":
+                        return "miércoles";
+                    case "jueves":
+                        return "jueves";
+                    case "viernes":
+                        return "viernes";
+                    case "sábado":
+                    case "sabado":
+                        return "sábado";
+                    case "domingo":
+                        return "domingo";
+                }
+                // Si llegamos aquí, no era un día válido: lo volvemos a pedir
+                mensaje = "«" + texto + "» no es un día de la semana.\n¿Qué día quieres viajar? (lunes, martes...)";
+            }
+        }
+
+        // Redondea una cantidad a 2 decimales (céntimos)
+        function redondear(cantidad) {
+            return Math.round(cantidad * 100) / 100;
+        }
+
+        // Da formato de euros: 12.5 → "12,50 €"
+        function euros(cantidad) {
+            return cantidad.toFixed(2).replace(".", ",") + " €";
+        }
+
+        // Programa principal. Devuelve false si el usuario cancela algún dato.
+        function calcularBillete() {
+            // ----- 1. Pedimos los datos -----
+            let nombre = prompt("¿Cómo te llamas?");
+            if (nombre === null) {
+                return false;
+            }
+            if (nombre.trim() === "") {
+                nombre = "viajero/a";
+            }
+
+            let edad = pedirEntero("¿Cuántos años tienes?", 0, 120);
+            if (edad === null) {
+                return false;
+            }
+
+            let dia = pedirDia();
+            if (dia === null) {
+                return false;
+            }
+
+            // ----- 2. Calculamos el descuento total y guardamos los motivos -----
+            let descuento = 0;      // % total de descuento
+            let motivos = "";       // lista HTML con los motivos
+
+            if ((edad >= 18 && edad <= 26) || edad > 60) {
+                descuento += DTO_EDAD;
+                motivos += "<li>" + DTO_EDAD + " % por edad: tienes " + edad + " años (entre 18 y 26, o más de 60).</li>";
+            }
+            if (dia === "miércoles" || dia === "viernes") {
+                descuento += DTO_DIA;
+                motivos += "<li>" + DTO_DIA + " % por viajar en " + dia + ".</li>";
+            }
+
+            // ----- 3. Calculamos los precios -----
+            let importeDescuento = redondear(PRECIO_BASE * descuento / 100);
+            let precioSinIva = redondear(PRECIO_BASE - importeDescuento);
+            let importeIva = redondear(precioSinIva * IVA / 100);
+            let precioConIva = redondear(precioSinIva + importeIva);
+
+            // ----- 4. Mostramos el resultado -----
+            document.write("<h2>Billete de " + nombre + "</h2>");
+            document.write("<p>Edad: " + edad + " años · Día del viaje: " + dia + "</p>");
+
+            document.write("<h3>Descuentos</h3>");
+            if (descuento === 0) {
+                document.write("<p>No se aplica ningún descuento: la edad no está entre 18 y 26 ni es mayor de 60, " +
+                               "y el viaje no es en miércoles ni en viernes.</p>");
+            } else {
+                document.write("<ul>" + motivos + "</ul>");
+            }
+
+            document.write("<h3>Resumen del precio</h3>");
+            document.write("<table>" +
+                "<tr><td>Precio del billete SIN IVA</td><td>" + euros(PRECIO_BASE) + "</td></tr>" +
+                "<tr><td>Descuento (" + descuento + " %)</td><td>- " + euros(importeDescuento) + "</td></tr>" +
+                "<tr><td>Precio final SIN IVA</td><td>" + euros(precioSinIva) + "</td></tr>" +
+                "<tr><td>IVA (" + IVA + " %)</td><td>+ " + euros(importeIva) + "</td></tr>" +
+                "<tr class='total'><td>Precio final CON IVA</td><td>" + euros(precioConIva) + "</td></tr>" +
+                "</table>");
+
+            return true;
+        }
+
+        if (!calcularBillete()) {
+            document.write("<p class='aviso'>Has cancelado. Recarga la página (F5) para empezar de nuevo.</p>");
+        }
+    </script>
+</body>
+</html>

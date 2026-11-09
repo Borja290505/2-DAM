@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2 - Letra del DNI</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+        .aviso { color: #b00020; }
+        .bien { color: #1b7f2a; font-weight: bold; }
+        .mal { color: #b00020; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 2</h1>
+    <p class="enunciado">La letra del DNI se obtiene con el resto de dividir el número entre 23
+        (resto 0 → 'T', resto 1 → 'R'...). El script pide un DNI e indica si es válido o no.</p>
+
+    <script>
+        // Array con las letras: la posición es el resto de dividir el número del DNI entre 23.
+        // (La última 'T' no se llega a usar, porque el resto como mucho vale 22)
+        var letras = ['T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E', 'T'];
+
+        let dni = prompt("Introduce un DNI (8 números y la letra, por ejemplo 12345678Z):");
+
+        if (dni === null) {
+            document.write("<p class='aviso'>Has cancelado. Recarga la página (F5) para empezar de nuevo.</p>");
+        } else {
+            // Quitamos espacios y guiones, y pasamos la letra a mayúsculas: "12345678-z" → "12345678Z"
+            let dniLimpio = dni.toUpperCase().replace(/[\s-]/g, "");
+
+            // Expresión regular: ^ inicio, \d{8} ocho dígitos, [A-Z] una letra, $ final
+            if (!/^\d{8}[A-Z]$/.test(dniLimpio)) {
+                document.write("<p>El DNI <strong>" + dni + "</strong> <span class='mal'>NO es válido</span>: " +
+                               "tiene que tener 8 números seguidos de una letra.</p>");
+            } else {
+                let numero = dniLimpio.substring(0, 8);   // los 8 primeros caracteres
+                let letra = dniLimpio.charAt(8);          // el último carácter
+                let resto = Number(numero) % 23;
+                let letraCorrecta = letras[resto];
+
+                document.write("<p>" + numero + " % 23 = " + resto + " → la letra que corresponde es la <strong>" +
+                               letraCorrecta + "</strong></p>");
+
+                if (letra === letraCorrecta) {
+                    document.write("<p>El DNI <strong>" + dniLimpio + "</strong> <span class='bien'>es VÁLIDO</span>.</p>");
+                } else {
+                    document.write("<p>El DNI <strong>" + dniLimpio + "</strong> <span class='mal'>NO es válido</span>: " +
+                                   "tiene la letra " + letra + " y debería tener la " + letraCorrecta + ".</p>");
+                }
+            }
+        }
+    </script>
+</body>
+</html>

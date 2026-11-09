@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 11 - Número de cifras</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+        .aviso { color: #b00020; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 11</h1>
+    <p class="enunciado">Algoritmo que pregunta un número entero y dice cuántas cifras tiene.
+        Si lo que se escribe no es un número, lo sigue pidiendo hasta que el usuario ponga un número.</p>
+
+    <script>
+        let mensaje = "Introduce un número entero:";
+        let texto;
+        let numero;
+
+        // Pedimos el número hasta que sea un entero.
+        // (Si el usuario pulsa Cancelar, prompt devuelve null y salimos del bucle)
+        do {
+            texto = prompt(mensaje);
+            numero = Number(texto);
+            mensaje = "«" + texto + "» no es un número entero.\nIntroduce un número entero:";
+        } while (texto !== null && (texto.trim() === "" || !Number.isInteger(numero)));
+
+        if (texto === null) {
+            document.write("<p class='aviso'>Has cancelado. Recarga la página (F5) para empezar de nuevo.</p>");
+        } else {
+            // Contamos las cifras dividiendo entre 10 hasta que no quede nada.
+            // Usamos el valor absoluto porque el signo "-" no es una cifra.
+            let resto = Math.abs(numero);
+            let cifras = 0;
+
+            // do...while para que el 0 cuente como 1 cifra
+            do {
+                cifras++;
+                resto = Math.floor(resto / 10);   // quitamos la última cifra
+            } while (resto > 0);
+
+            document.write("<p>El número <strong>" + numero + "</strong> tiene <strong>" + cifras + "</strong> " +
+                           (cifras === 1 ? "cifra" : "cifras") + ".</p>");
+        }
+    </script>
+</body>
+</html>

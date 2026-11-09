@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2 - Números casi primos</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+        button { font-size: 1.1em; padding: 0.4em 1.2em; cursor: pointer; }
+        #mensaje { margin-left: 1em; }
+
+        /* La tabla es muy grande: la metemos en una caja con barras de desplazamiento */
+        .contenedor { overflow: auto; max-height: 65vh; border: 1px solid #ccc; margin-top: 1em; }
+        #tabla { border-collapse: collapse; font-size: 11px; }
+        #tabla td { border: 1px solid #ddd; padding: 1px 4px; text-align: right; min-width: 28px; }
+        #tabla td.casi-primo { background: yellow; font-weight: bold; }
+    </style>
+    <script src="ejercicio2.js" defer></script>
+</head>
+<body>
+    <h1>Ejercicio 2</h1>
+    <div class="enunciado">
+        <p>Crea dinámicamente una tabla de 100x100 con los números del 1 al 10000. El botón pone con fondo amarillo
+            las celdas que tienen números "casi primos".</p>
+        <p>Número casi primo: solo es divisible por sí mismo, por la unidad y por <strong>un solo</strong> número más.
+            Ejemplo: el 4 sí (1, 2 y 4); el 2 no (solo 1 y 2); el 8 no (1, 2, 4 y 8).</p>
+    </div>
+
+    <p>
+        <button id="calcular">Calcular números casi primos</button>
+        <span id="mensaje"></span>
+    </p>
+
+    <div class="contenedor">
+        <table id="tabla"></table>
+    </div>
+</body>
+</html>

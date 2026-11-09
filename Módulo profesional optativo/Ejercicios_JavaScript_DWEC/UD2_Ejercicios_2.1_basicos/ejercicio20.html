@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 20 - Adivina el número</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+        button { font-size: 1.2em; padding: 0.4em 1.5em; cursor: pointer; }
+        table { border-collapse: collapse; margin-top: 0.5em; }
+        th, td { border: 1px solid #999; padding: 4px 14px; text-align: center; }
+        th { background: #f0db4f; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 20</h1>
+    <div class="enunciado">
+        <p>Juego de adivinar un número aleatorio entre dos números enteros que elige el usuario (en cualquier orden).</p>
+        <ul>
+            <li>Fácil: N/2 intentos · Normal: N/4 intentos · Difícil: N/8 intentos (N = rango del número aleatorio).</li>
+            <li>En fácil y normal, al fallar se indica si el número es mayor o menor.</li>
+            <li>Al acertar se pide el nombre y se apunta la puntuación (intentos) y la dificultad en la página.</li>
+            <li>Al terminar se pregunta si se quiere jugar de nuevo.</li>
+        </ul>
+    </div>
+
+    <!-- Al pulsar el botón se ejecuta la función jugar() -->
+    <p><button onclick="jugar()">Jugar</button></p>
+
+    <h2>Puntuaciones</h2>
+    <table>
+        <thead>
+            <tr><th>Nombre</th><th>Intentos</th><th>Dificultad</th><th>Rango</th></tr>
+        </thead>
+        <tbody id="puntuaciones">
+            <tr id="sinPuntuaciones"><td colspan="4">Todavía no hay puntuaciones</td></tr>
+        </tbody>
+    </table>
+
+    <script>
+        // Pide un número entero. Si no lo es, lo vuelve a pedir.
+        // Devuelve null si el usuario pulsa "Cancelar".
+        function pedirEntero(mensaje) {
+            let texto = prompt(mensaje);
+            while (texto !== null && (texto.trim() === "" || !Number.isInteger(Number(texto)))) {
+                texto = prompt("«" + texto + "» no es un número entero.\n" + mensaje);
+            }
+            if (texto === null) {
+                return null;
+            }
+            return Number(texto);
+        }
+
+        // Pide la dificultad hasta que sea fácil, normal o difícil (con o sin tilde).
+        // Devuelve null si el usuario pulsa "Cancelar".
+        function pedirDificultad() {
+            let mensaje = "Elige la dificultad: fácil, normal o difícil";
+            while (true) {
+                let texto = prompt(mensaje);
+                if (texto === null) {
+                    return null;
+                }
+                switch (texto.trim().toLowerCase()) {
+                    case "fácil":
+                    case "facil":
+                        return "fácil";
+                    case "normal":
+                        return "normal";
+                    case "difícil":
+                    case "dificil":
+                        return "difícil";
+                }
+                mensaje = "«" + texto + "» no es una dificultad válida.\nElige: fácil, normal o difícil";
+            }
+        }
+
+        // Añade una fila a la tabla de puntuaciones de la página
+        function anotarPuntuacion(nombre, intentos, dificultad, minimo, maximo) {
+            // La primera vez quitamos la fila de "Todavía no hay puntuaciones"
+            let filaVacia = document.getElementById("sinPuntuaciones");
+            if (filaVacia !== null) {
+                filaVacia.remove();
+            }
+
+            let fila = document.getElementById("puntuaciones").insertRow();
+            // textContent escribe el texto tal cual (sin interpretar HTML)
+            fila.insertCell().textContent = nombre;
+            fila.insertCell().textContent = intentos;
+            fila.insertCell().textContent = dificultad;
+            fila.insertCell().textContent = minimo + " - " + maximo;
+        }
+
+        // Función principal del juego: se ejecuta al pulsar el botón "Jugar"
+        function jugar() {
+            let otraPartida;
+
+            do {
+                // ----- 1. Rango: dos números enteros -----
+                let numeroA = pedirEntero("Introduce el primer número del rango:");
+                if (numeroA === null) {
+                    return;   // si cancela, se acaba el juego
+                }
+                let numeroB = pedirEntero("Introduce el segundo número del rango:");
+                if (numeroB === null) {
+                    return;
+                }
+
+                // Nos pueden dar primero el mayor o el menor: lo controlamos con Math.min y Math.max
+                const MIN = Math.min(numeroA, numeroB);
+                const MAX = Math.max(numeroA, numeroB);
+
+                // ----- 2. Número aleatorio entre MIN y MAX (ambos incluidos) -----
+                const secreto = Math.floor(Math.random() * (MAX - MIN + 1)) + MIN;
+
+                // ----- 3. Dificultad y número de intentos -----
+                let dificultad = pedirDificultad();
+                if (dificultad === null) {
+                    return;
+                }
+
+                const N = MAX - MIN + 1;   // rango: cuántos números posibles hay
+                let divisor;
+                switch (dificultad) {
+                    case "fácil":
+                        divisor = 2;
+                        break;
+                    case "normal":
+                        divisor = 4;
+                        break;
+                    case "difícil":
+                        divisor = 8;
+                        break;
+                }
+                // Redondeamos hacia abajo, pero como mínimo siempre hay 1 intento
+                const intentosMaximos = Math.max(1, Math.floor(N / divisor));
+
+                alert("He pensado un número entre " + MIN + " y " + MAX + ".\n" +
+                      "Dificultad " + dificultad + ": tienes " + intentosMaximos + " intento(s).");
+
+                // ----- 4. Intentos del usuario -----
+                let intentos = 0;
+                let acertado = false;
+                let mensaje = "Adivina el número (entre " + MIN + " y " + MAX + "):";
+
+                while (!acertado && intentos < intentosMaximos) {
+                    let numero = pedirEntero(mensaje);
+                    if (numero === null) {
+                        return;   // abandona la partida
+                    }
+                    intentos++;
+
+                    if (numero === secreto) {
+                        acertado = true;
+                    } else {
+                        mensaje = "¡Has fallado! ";
+                        // En fácil y normal le decimos si el número es mayor o menor
+                        if (dificultad !== "difícil") {
+                            if (secreto > numero) {
+                                mensaje += "El número es MAYOR que " + numero + ". ";
+                            } else {
+                                mensaje += "El número es MENOR que " + numero + ". ";
+                            }
+                        }
+                        mensaje += "Te quedan " + (intentosMaximos - intentos) + " intento(s).\n" +
+                                   "Adivina el número (entre " + MIN + " y " + MAX + "):";
+                    }
+                }
+
+                // ----- 5. Fin de la partida -----
+                if (acertado) {
+                    let nombre = prompt("¡ENHORABUENA! Has acertado el número " + secreto + " en " + intentos + " intento(s).\n" +
+                                        "Escribe tu nombre para la tabla de puntuaciones:");
+                    if (nombre === null || nombre.trim() === "") {
+                        nombre = "Anónimo";
+                    }
+                    anotarPuntuacion(nombre.trim(), intentos, dificultad, MIN, MAX);
+                } else {
+                    alert("¡Se acabaron los intentos! El número era el " + secreto + ".");
+                }
+
+                // ----- 6. ¿Otra partida? Si dice que sí, se vuelven a pedir todos los datos -----
+                otraPartida = confirm("¿Quieres jugar de nuevo?");
+            } while (otraPartida);
+        }
+    </script>
+</body>
+</html>

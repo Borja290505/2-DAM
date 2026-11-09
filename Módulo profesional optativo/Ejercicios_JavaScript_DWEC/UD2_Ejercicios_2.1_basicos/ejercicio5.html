@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 5 - ¿Cuál es mayor?</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+        .aviso { color: #b00020; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 5</h1>
+    <p class="enunciado">Script que, dados dos números que introduce el usuario, dice cuál de los dos es mayor.</p>
+
+    <script>
+        // Pide un número (admite decimales con punto o con coma).
+        // Si lo que se escribe no es un número, lo vuelve a pedir.
+        // Devuelve null si el usuario pulsa "Cancelar".
+        function pedirNumero(mensaje) {
+            let texto = prompt(mensaje);
+            while (texto !== null) {
+                // Cambiamos la coma por un punto para aceptar decimales como "3,5"
+                let numero = Number(texto.replace(",", "."));
+                if (texto.trim() !== "" && Number.isFinite(numero)) {
+                    return numero;
+                }
+                texto = prompt("«" + texto + "» no es un número.\n" + mensaje);
+            }
+            return null;
+        }
+
+        let numero1 = pedirNumero("Introduce el primer número:");
+        let numero2 = null;
+        if (numero1 !== null) {
+            numero2 = pedirNumero("Introduce el segundo número:");
+        }
+
+        // Comparamos los dos números
+        if (numero1 === null || numero2 === null) {
+            document.write("<p class='aviso'>Has cancelado. Recarga la página (F5) para empezar de nuevo.</p>");
+        } else if (numero1 > numero2) {
+            document.write("<p>El mayor es el <strong>" + numero1 + "</strong> (" + numero1 + " &gt; " + numero2 + ").</p>");
+        } else if (numero2 > numero1) {
+            document.write("<p>El mayor es el <strong>" + numero2 + "</strong> (" + numero2 + " &gt; " + numero1 + ").</p>");
+        } else {
+            document.write("<p>Los dos números son <strong>iguales</strong> (" + numero1 + ").</p>");
+        }
+    </script>
+</body>
+</html>

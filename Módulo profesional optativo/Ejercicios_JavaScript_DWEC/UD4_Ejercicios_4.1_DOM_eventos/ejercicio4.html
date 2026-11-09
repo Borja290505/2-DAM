@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 4 - Ocultar y eliminar párrafos</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+        button { font-size: 1.1em; padding: 0.4em 1.2em; cursor: pointer; }
+
+        .parrafo {
+            background: #e8f1fb;
+            border: 1px solid #9bbbe0;
+            padding: 0.8em 1em;
+            max-width: 600px;
+            cursor: pointer;
+            user-select: none;   /* para que el doble clic no seleccione el texto */
+        }
+        .oculto { display: none; }
+    </style>
+    <script src="ejercicio4.js" defer></script>
+</head>
+<body>
+    <h1>Ejercicio 4</h1>
+    <p class="enunciado">Tres párrafos: al hacer clic sobre ellos se ocultan y al hacer doble clic se eliminan.
+        El botón "Reaparecer" vuelve a mostrar los ocultos (pero no los eliminados).</p>
+
+    <p class="parrafo">Párrafo 1: haz clic para ocultarme o doble clic para eliminarme.</p>
+    <p class="parrafo">Párrafo 2: haz clic para ocultarme o doble clic para eliminarme.</p>
+    <p class="parrafo">Párrafo 3: haz clic para ocultarme o doble clic para eliminarme.</p>
+
+    <button id="reaparecer">Reaparecer</button>
+</body>
+</html>

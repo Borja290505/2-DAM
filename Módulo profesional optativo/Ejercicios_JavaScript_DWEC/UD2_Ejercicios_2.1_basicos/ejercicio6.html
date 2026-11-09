@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 6 - Factorial</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+        .aviso { color: #b00020; }
+        p { overflow-wrap: anywhere; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 6</h1>
+    <p class="enunciado">Script que, dado un número que introduce el usuario, calcula su factorial
+        (el producto de todos los enteros desde 1 hasta ese número).</p>
+
+    <script>
+        // Pide un número entero entre minimo y maximo (incluidos).
+        // Si lo que escribe el usuario no vale, se lo vuelve a pedir.
+        // Devuelve null si el usuario pulsa "Cancelar".
+        function pedirEntero(mensaje, minimo, maximo) {
+            let texto = prompt(mensaje);
+            while (texto !== null) {
+                let numero = Number(texto);
+                if (texto.trim() !== "" && Number.isInteger(numero) && numero >= minimo && numero <= maximo) {
+                    return numero;
+                }
+                texto = prompt("«" + texto + "» no es válido.\n" + mensaje);
+            }
+            return null;
+        }
+
+        // 170! es el factorial más grande que cabe en un número de JavaScript (171! ya da Infinity)
+        const MAXIMO = 170;
+
+        let numero = pedirEntero("Introduce un número entero entre 0 y " + MAXIMO + ":", 0, MAXIMO);
+
+        if (numero === null) {
+            document.write("<p class='aviso'>Has cancelado. Recarga la página (F5) para empezar de nuevo.</p>");
+        } else if (numero === 0) {
+            // Por definición, el factorial de 0 es 1
+            document.write("<p><strong>0! = 1</strong> (por definición, el factorial de 0 es 1)</p>");
+        } else {
+            let factorial = 1;
+            let operacion = "";   // aquí vamos montando el texto "1 × 2 × 3 × ..."
+
+            // Multiplicamos todos los enteros desde 1 hasta el número
+            for (let i = 1; i <= numero; i++) {
+                factorial = factorial * i;
+                if (i === 1) {
+                    operacion = "1";
+                } else {
+                    operacion += " × " + i;
+                }
+            }
+
+            document.write("<p>" + numero + "! = " + operacion + "</p>");
+            // toLocaleString pone los puntos de los miles: 3628800 → 3.628.800
+            document.write("<p><strong>" + numero + "! = " + factorial.toLocaleString("es-ES") + "</strong></p>");
+        }
+    </script>
+</body>
+</html>

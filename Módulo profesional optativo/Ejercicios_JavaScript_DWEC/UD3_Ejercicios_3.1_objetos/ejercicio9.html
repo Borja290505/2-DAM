@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 9 - Mayúscula inicial</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+        .aviso { color: #b00020; }
+        .resultado { font-size: 1.4em; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 9</h1>
+    <p class="enunciado">Script que pide una frase y pone en mayúscula la primera letra de cada palabra
+        y en minúscula el resto.</p>
+
+    <script>
+        // Pone en mayúscula la primera LETRA de una palabra y el resto en minúsculas.
+        // Buscamos la primera letra por si la palabra empieza por un signo: "¿qué" → "¿Qué"
+        function capitalizar(palabra) {
+            palabra = palabra.toLowerCase();
+            for (let i = 0; i < palabra.length; i++) {
+                let caracter = palabra.charAt(i);
+                // Es una letra si cambia al pasarla a mayúsculas
+                if (caracter.toUpperCase() !== caracter) {
+                    return palabra.substring(0, i) + caracter.toUpperCase() + palabra.substring(i + 1);
+                }
+            }
+            return palabra;   // no tiene letras (por ejemplo "123")
+        }
+
+        let frase = prompt("Escribe una frase:");
+
+        if (frase === null) {
+            document.write("<p class='aviso'>Has cancelado. Recarga la página (F5) para empezar de nuevo.</p>");
+        } else {
+            // split(" ") separa la frase en un array de palabras, map() aplica capitalizar a cada una
+            // y join(" ") las vuelve a unir con espacios
+            let resultado = frase.split(" ").map(capitalizar).join(" ");
+
+            document.write("<p>Frase original: " + frase + "</p>");
+            document.write("<p class='resultado'>" + resultado + "</p>");
+        }
+    </script>
+</body>
+</html>

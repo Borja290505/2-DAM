@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 7 - Palíndromos</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+        .aviso { color: #b00020; }
+        .bien { color: #1b7f2a; font-weight: bold; }
+        .mal { color: #b00020; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 7</h1>
+    <p class="enunciado">Script que pide una cadena y dice si es un palíndromo, es decir, si se escribe igual
+        de derecha a izquierda que de izquierda a derecha. Ejemplo: <em>Allí ves Sevilla.</em></p>
+
+    <script>
+        // Deja solo las letras y los números, en minúsculas y sin tildes,
+        // para que "Allí ves Sevilla." se convierta en "allivessevilla"
+        function limpiarTexto(texto) {
+            let limpio = texto.toLowerCase();
+
+            // Quitamos las tildes y la diéresis (la ñ la dejamos, es otra letra)
+            limpio = limpio.replace(/[áàâä]/g, "a")
+                           .replace(/[éèêë]/g, "e")
+                           .replace(/[íìîï]/g, "i")
+                           .replace(/[óòôö]/g, "o")
+                           .replace(/[úùûü]/g, "u");
+
+            // Quitamos todo lo que no sea letra o número (espacios, puntos, comas, ¿?...)
+            limpio = limpio.replace(/[^a-zñ0-9]/g, "");
+            return limpio;
+        }
+
+        let frase = prompt("Escribe una palabra o frase:", "Allí ves Sevilla.");
+
+        if (frase === null) {
+            document.write("<p class='aviso'>Has cancelado. Recarga la página (F5) para empezar de nuevo.</p>");
+        } else {
+            let limpio = limpiarTexto(frase);
+
+            // Le damos la vuelta: la convertimos en array de letras, invertimos el array y la volvemos a unir
+            let alReves = limpio.split("").reverse().join("");
+
+            document.write("<p>Texto: <strong>" + frase + "</strong></p>");
+
+            if (limpio === "") {
+                document.write("<p class='aviso'>El texto no tiene letras ni números.</p>");
+            } else {
+                document.write("<p>Sin espacios, signos ni tildes: " + limpio + "<br>Al revés: " + alReves + "</p>");
+                if (limpio === alReves) {
+                    document.write("<p class='bien'>SÍ es un palíndromo.</p>");
+                } else {
+                    document.write("<p class='mal'>NO es un palíndromo.</p>");
+                }
+            }
+        }
+    </script>
+</body>
+</html>

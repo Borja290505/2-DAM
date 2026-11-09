@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3 - Tablas de multiplicar</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+        table { border-collapse: collapse; }
+        th, td { border: 1px solid #999; padding: 4px 10px; text-align: center; white-space: nowrap; }
+        th { background: #f0db4f; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 3</h1>
+    <p class="enunciado">Script que genera la tabla de multiplicar de los 10 primeros números,
+        escrita dentro de una sección (<code>&lt;section&gt;</code>) y dentro de una tabla (<code>&lt;table&gt;</code>).</p>
+
+    <script>
+        // Cuántas tablas generamos (del 1 al 10) y hasta qué número multiplicamos
+        const NUMERO_TABLAS = 10;
+        const MULTIPLICADOR_MAXIMO = 10;
+
+        // Vamos montando todo el HTML en una cadena y al final lo escribimos de una vez
+        let html = "<section>";
+        html += "<h2>Tablas de multiplicar del 1 al " + NUMERO_TABLAS + "</h2>";
+        html += "<table>";
+
+        // Fila de cabecera: una columna por cada tabla
+        html += "<tr>";
+        for (let tabla = 1; tabla <= NUMERO_TABLAS; tabla++) {
+            html += "<th>Tabla del " + tabla + "</th>";
+        }
+        html += "</tr>";
+
+        // Una fila por cada multiplicador (1, 2, 3... 10).
+        // En cada fila, una celda por cada tabla: 1 × n, 2 × n, 3 × n...
+        for (let multiplicador = 1; multiplicador <= MULTIPLICADOR_MAXIMO; multiplicador++) {
+            html += "<tr>";
+            for (let tabla = 1; tabla <= NUMERO_TABLAS; tabla++) {
+                html += "<td>" + tabla + " × " + multiplicador + " = " + (tabla * multiplicador) + "</td>";
+            }
+            html += "</tr>";
+        }
+
+        html += "</table>";
+        html += "</section>";
+
+        document.write(html);
+    </script>
+</body>
+</html>

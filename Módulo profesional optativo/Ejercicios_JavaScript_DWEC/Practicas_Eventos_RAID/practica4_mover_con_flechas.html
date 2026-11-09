@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Práctica 4 - Mover una caja con las flechas</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2em; }
+        #tablero { position: relative; width: 500px; height: 300px; border: 2px solid #333; background: #f7f7f7; }
+        #caja { position: absolute; width: 50px; height: 50px; background: #226fc1; left: 0; top: 0; }
+        #posicion { font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Práctica 4: mover una caja con el teclado</h1>
+    <p>Usa las flechas del teclado para mover la caja. Con la barra espaciadora vuelve al principio.
+        La caja no puede salirse del tablero.</p>
+
+    <div id="tablero"><div id="caja"></div></div>
+    <p id="posicion">Posición: 0, 0</p>
+
+    <script>
+        var PASO = 25;           // píxeles que se mueve en cada pulsación
+        var ANCHO = 500 - 50;    // posición máxima en horizontal (ancho tablero - ancho caja)
+        var ALTO = 300 - 50;     // posición máxima en vertical
+
+        var caja = document.getElementById("caja");
+        var x = 0;
+        var y = 0;
+
+        function dibujar() {
+            caja.style.left = x + "px";
+            caja.style.top = y + "px";
+            document.getElementById("posicion").textContent = "Posición: " + x + ", " + y;
+        }
+
+        document.onkeydown = function (evento) {
+            // keyCode de las flechas: 37 izquierda, 38 arriba, 39 derecha, 40 abajo; 32 espacio
+            switch (evento.keyCode) {
+                case 37: x = Math.max(0, x - PASO); break;
+                case 39: x = Math.min(ANCHO, x + PASO); break;
+                case 38: y = Math.max(0, y - PASO); break;
+                case 40: y = Math.min(ALTO, y + PASO); break;
+                case 32: x = 0; y = 0; break;
+                default: return;   // otra tecla: no hacemos nada
+            }
+            evento.preventDefault();   // que las flechas no muevan la página
+            dibujar();
+        };
+    </script>
+</body>
+</html>

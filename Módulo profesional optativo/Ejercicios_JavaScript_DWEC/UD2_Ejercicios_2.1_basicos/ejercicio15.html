@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 15 - Ordenar palabras</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+        .aviso { color: #b00020; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 15</h1>
+    <p class="enunciado">Script que pide 4 palabras y las muestra ordenadas alfabéticamente.</p>
+
+    <script>
+        const CANTIDAD = 4;
+        let palabras = [];
+
+        // 1. Pedimos las 4 palabras y las guardamos en un array
+        for (let i = 1; i <= CANTIDAD; i++) {
+            let palabra = prompt("Escribe la palabra " + i + " de " + CANTIDAD + ":");
+
+            // Si la deja vacía, se la volvemos a pedir
+            while (palabra !== null && palabra.trim() === "") {
+                palabra = prompt("No has escrito nada.\nEscribe la palabra " + i + " de " + CANTIDAD + ":");
+            }
+            if (palabra === null) {
+                break;   // ha pulsado Cancelar: dejamos de pedir
+            }
+            palabras.push(palabra.trim());
+        }
+
+        if (palabras.length < CANTIDAD) {
+            document.write("<p class='aviso'>Has cancelado. Recarga la página (F5) para empezar de nuevo.</p>");
+        } else {
+            let ordenOriginal = palabras.join(", ");
+
+            // 2. Ordenamos con el método de la burbuja:
+            //    comparamos cada palabra con la siguiente y, si están desordenadas, las intercambiamos.
+            //    localeCompare compara textos según el idioma (respeta tildes, la ñ y no separa mayúsculas
+            //    de minúsculas), devuelve un número > 0 si la primera va DESPUÉS que la segunda.
+            for (let vuelta = 0; vuelta < palabras.length - 1; vuelta++) {
+                for (let j = 0; j < palabras.length - 1 - vuelta; j++) {
+                    if (palabras[j].localeCompare(palabras[j + 1], "es") > 0) {
+                        let auxiliar = palabras[j];
+                        palabras[j] = palabras[j + 1];
+                        palabras[j + 1] = auxiliar;
+                    }
+                }
+            }
+
+            // 3. Mostramos el resultado
+            document.write("<p>Palabras introducidas: " + ordenOriginal + "</p>");
+            document.write("<p>Ordenadas alfabéticamente:</p>");
+            document.write("<ol>");
+            for (let i = 0; i < palabras.length; i++) {
+                document.write("<li>" + palabras[i] + "</li>");
+            }
+            document.write("</ol>");
+        }
+    </script>
+</body>
+</html>

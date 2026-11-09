@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1 - Media de un vector</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+        .aviso { color: #b00020; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 1</h1>
+    <p class="enunciado">Script que pide al usuario un vector de números enteros (termina al teclear un 0)
+        y muestra la media aritmética de sus elementos, comprobando antes que todos los valores son números.</p>
+
+    <script>
+        let vector = [];   // aquí guardamos los números introducidos
+        let mensaje = "Introduce un número entero (0 para terminar):";
+
+        // Pedimos números hasta que el usuario escriba un 0 (o pulse Cancelar)
+        while (true) {
+            let texto = prompt(mensaje);
+            if (texto === null) {
+                break;   // Cancelar: terminamos igual que con el 0
+            }
+
+            let numero = Number(texto);
+
+            // Comprobamos que el valor es un número entero ANTES de guardarlo.
+            // Así, cuando hagamos la media, todos los elementos del vector son números.
+            if (texto.trim() === "" || !Number.isInteger(numero)) {
+                mensaje = "«" + texto + "» no es un número entero, no se guarda.\n" +
+                          "Vector: [" + vector.join(", ") + "]\nIntroduce un número entero (0 para terminar):";
+                continue;
+            }
+
+            if (numero === 0) {
+                break;   // el 0 marca el final
+            }
+
+            vector.push(numero);   // añadimos el número al final del vector
+            mensaje = "Vector: [" + vector.join(", ") + "]\nIntroduce otro número entero (0 para terminar):";
+        }
+
+        if (vector.length === 0) {
+            document.write("<p class='aviso'>No has introducido ningún número, así que no se puede calcular la media.</p>");
+        } else {
+            // reduce recorre el vector acumulando la suma de todos sus elementos
+            let suma = vector.reduce(function (acumulado, valor) {
+                return acumulado + valor;
+            }, 0);
+            let media = suma / vector.length;
+
+            document.write("<p>Vector introducido: <strong>[" + vector.join(", ") + "]</strong></p>");
+            document.write("<p>Número de elementos: " + vector.length + "</p>");
+            document.write("<p>Suma: " + suma + "</p>");
+            // Redondeamos la media a 2 decimales como mucho
+            document.write("<p>Media aritmética: <strong>" + Math.round(media * 100) / 100 + "</strong></p>");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1 - Datos personales</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 1</h1>
+    <p class="enunciado">Script que pide al usuario su nombre, edad y profesión, los guarda en variables
+        y los imprime en la página con <code>document.write()</code>.</p>
+
+    <script>
+        // 1. Pedimos los datos al usuario con prompt() y los guardamos en variables
+        let nombre = prompt("¿Cómo te llamas?");
+        let edad = prompt("¿Cuántos años tienes?");
+        let profesion = prompt("¿Cuál es tu profesión?");
+
+        // 2. Escribimos los datos en la página con document.write()
+        document.write("<h2>Datos introducidos</h2>");
+        document.write("<p><strong>Nombre:</strong> " + nombre + "</p>");
+        document.write("<p><strong>Edad:</strong> " + edad + " años</p>");
+        document.write("<p><strong>Profesión:</strong> " + profesion + "</p>");
+    </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 12 - Fecha de nacimiento dd-mm-aaaa</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+        input, button { font-size: 1.1em; padding: 0.3em 0.6em; }
+        #resultado { font-size: 1.3em; margin-top: 1em; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 12</h1>
+    <p class="enunciado">Pide la fecha de nacimiento y la devuelve en formato dd-mm-aaaa (por ejemplo 26-11-2015).</p>
+
+    <label for="fechaNacimiento">Fecha de nacimiento:</label>
+    <input type="date" id="fechaNacimiento">
+    <button onclick="convertir()">Convertir</button>
+
+    <p id="resultado"></p>
+
+    <script>
+        // Añade un 0 delante si el número tiene una sola cifra: 5 → "05"
+        function dosCifras(numero) {
+            return String(numero).padStart(2, "0");
+        }
+
+        // Recibe un objeto Date y devuelve la fecha en formato dd-mm-aaaa
+        function formatoDDMMAAAA(fecha) {
+            let dia = dosCifras(fecha.getDate());
+            let mes = dosCifras(fecha.getMonth() + 1);   // getMonth() va de 0 (enero) a 11 (diciembre)
+            let anyo = fecha.getFullYear();
+            return dia + "-" + mes + "-" + anyo;
+        }
+
+        function convertir() {
+            let valor = document.getElementById("fechaNacimiento").value;   // llega como "aaaa-mm-dd"
+            let resultado = document.getElementById("resultado");
+
+            if (valor === "") {
+                resultado.textContent = "Elige primero una fecha.";
+                return;
+            }
+
+            // Creamos el objeto Date con el año, el mes (de 0 a 11) y el día
+            let partes = valor.split("-");
+            let fecha = new Date(Number(partes[0]), Number(partes[1]) - 1, Number(partes[2]));
+
+            if (fecha > new Date()) {
+                resultado.textContent = "La fecha de nacimiento no puede ser posterior a hoy.";
+                return;
+            }
+
+            resultado.innerHTML = "Tu fecha de nacimiento es: <strong>" + formatoDDMMAAAA(fecha) + "</strong>";
+        }
+
+        // El calendario no deja elegir días posteriores a hoy (atributo max, en formato aaaa-mm-dd)
+        let hoy = new Date();
+        document.getElementById("fechaNacimiento").max =
+            hoy.getFullYear() + "-" + dosCifras(hoy.getMonth() + 1) + "-" + dosCifras(hoy.getDate());
+    </script>
+</body>
+</html>

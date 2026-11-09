@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 21 - Calculadora</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+
+        /* Rejilla de 4 columnas, como en el dibujo del enunciado */
+        .calculadora {
+            display: grid;
+            grid-template-columns: repeat(4, 140px);
+            gap: 10px;
+            margin-top: 1.5em;
+        }
+        .calculadora button {
+            height: 50px;
+            font-size: 1em;
+            background: #efefef;
+            border: 1px solid #888;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .calculadora button:hover { background: #e2e2e2; }
+        .calculadora .doble { grid-column: span 2; }   /* el botón "=" ocupa dos columnas */
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 21</h1>
+    <div class="enunciado">
+        <p>Calculadora sencilla. Cada pulsación muestra en un <code>alert</code> lo que llevamos escrito:</p>
+        <ul>
+            <li>Dígitos: "3", "34"... y con operación: "34 + 7".</li>
+            <li>Operación: si aún no hay primer número no hace nada; si no, muestra "34 +".</li>
+            <li>Igual: si falta algún número o la operación no hace nada; si no, muestra "34 + 7 = 41".</li>
+            <li>C (reset): la calculadora empieza de nuevo.</li>
+        </ul>
+    </div>
+
+    <!-- Cada botón llama a su función de JavaScript con el atributo onclick -->
+    <div class="calculadora">
+        <button onclick="pulsarNumero('1')">1</button>
+        <button onclick="pulsarNumero('2')">2</button>
+        <button onclick="pulsarNumero('3')">3</button>
+        <button onclick="pulsarOperacion('+')">+</button>
+
+        <button onclick="pulsarNumero('4')">4</button>
+        <button onclick="pulsarNumero('5')">5</button>
+        <button onclick="pulsarNumero('6')">6</button>
+        <button onclick="pulsarOperacion('-')">-</button>
+
+        <button onclick="pulsarNumero('7')">7</button>
+        <button onclick="pulsarNumero('8')">8</button>
+        <button onclick="pulsarNumero('9')">9</button>
+        <button onclick="pulsarOperacion('*')">*</button>
+
+        <button onclick="pulsarNumero('0')">0</button>
+        <button class="doble" onclick="pulsarIgual()">=</button>
+        <button onclick="pulsarOperacion('/')">/</button>
+
+        <button onclick="reiniciar()">C</button>
+    </div>
+
+    <script>
+        // Estado de la calculadora.
+        // Los números se guardan como texto para poder ir añadiendo dígitos: "3" → "34"
+        let numero1 = "";
+        let operador = "";
+        let numero2 = "";
+        let hayResultado = false;   // true justo después de pulsar "="
+
+        // Se pulsa un dígito (0-9)
+        function pulsarNumero(digito) {
+            // Si acabamos de ver un resultado, un dígito nuevo empieza otra operación
+            if (hayResultado) {
+                reiniciar();
+            }
+
+            if (operador === "") {
+                // Todavía no hay operación: el dígito va al primer número
+                // (si el número era "0" lo sustituimos, para no escribir ceros a la izquierda)
+                if (numero1 === "0") {
+                    numero1 = digito;
+                } else {
+                    numero1 += digito;
+                }
+                alert(numero1);
+            } else {
+                // Ya hay primer número y operación: el dígito va al segundo número
+                if (numero2 === "0") {
+                    numero2 = digito;
+                } else {
+                    numero2 += digito;
+                }
+                alert(numero1 + " " + operador + " " + numero2);
+            }
+        }
+
+        // Se pulsa + - * /
+        function pulsarOperacion(op) {
+            // Si no hay primer número, no hace nada
+            if (numero1 === "") {
+                return;
+            }
+            // Si ya se está escribiendo el segundo número, tampoco (hay que pulsar = o C)
+            if (numero2 !== "") {
+                return;
+            }
+            operador = op;          // si ya había una operación, la cambiamos por la nueva
+            hayResultado = false;   // seguimos operando con el número que hay (puede ser un resultado anterior)
+            alert(numero1 + " " + operador);
+        }
+
+        // Se pulsa =
+        function pulsarIgual() {
+            // Si falta el primer número, la operación o el segundo número, no hace nada
+            if (numero1 === "" || operador === "" || numero2 === "") {
+                return;
+            }
+
+            let a = Number(numero1);
+            let b = Number(numero2);
+
+            if (operador === "/" && b === 0) {
+                alert(numero1 + " / 0 → no se puede dividir entre 0");
+                reiniciar();
+                return;
+            }
+
+            let resultado;
+            switch (operador) {
+                case "+":
+                    resultado = a + b;
+                    break;
+                case "-":
+                    resultado = a - b;
+                    break;
+                case "*":
+                    resultado = a * b;
+                    break;
+                case "/":
+                    resultado = a / b;
+                    break;
+            }
+
+            // Limitamos los decimales para evitar cosas como 3.3333333333333335
+            resultado = Number(resultado.toFixed(10));
+
+            alert(numero1 + " " + operador + " " + numero2 + " = " + resultado);
+
+            // El resultado pasa a ser el primer número, por si se quiere seguir operando con él
+            numero1 = String(resultado);
+            operador = "";
+            numero2 = "";
+            hayResultado = true;
+        }
+
+        // Botón C: la calculadora empieza de nuevo
+        function reiniciar() {
+            numero1 = "";
+            operador = "";
+            numero2 = "";
+            hayResultado = false;
+        }
+    </script>
+</body>
+</html>

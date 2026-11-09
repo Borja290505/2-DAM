@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 9 - Personajes de Star Wars</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+        .aviso { color: #b00020; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 9</h1>
+    <p class="enunciado">Si el usuario introduce C3PO, R2, Vader o Luck, el script responde que son personajes
+        de Star Wars; con cualquier otro nombre responde que no son personajes de la película.
+        Da igual que se escriba en mayúsculas o en minúsculas.</p>
+
+    <script>
+        let personaje = prompt("Escribe el nombre de un personaje:");
+
+        // Si pulsa Cancelar, prompt devuelve null: lo tratamos como texto vacío
+        if (personaje === null) {
+            personaje = "";
+        }
+        personaje = personaje.trim();
+
+        // Pasamos el texto a mayúsculas para que dé igual cómo lo escriba (vader, Vader, VADER...).
+        // Ojo: el método se escribe toUpperCase(), con la C en mayúscula.
+        let personajeMayusculas = personaje.toUpperCase();
+
+        if (personaje === "") {
+            document.write("<p class='aviso'>No has escrito ningún nombre.</p>");
+        } else {
+            switch (personajeMayusculas) {
+                case "C3PO":
+                case "R2":
+                case "VADER":
+                case "LUCK":   // así aparece en el enunciado
+                case "LUKE":   // y así se escribe el nombre de Luke Skywalker
+                    document.write("<p><strong>" + personaje + "</strong> es un personaje de Star Wars.</p>");
+                    break;
+                default:
+                    document.write("<p><strong>" + personaje + "</strong> no es un personaje de la película.</p>");
+            }
+        }
+    </script>
+</body>
+</html>

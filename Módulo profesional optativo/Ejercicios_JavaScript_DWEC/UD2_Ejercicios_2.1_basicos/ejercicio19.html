@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 19 - Tabla con sumas</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+        .aviso { color: #b00020; }
+        table { border-collapse: collapse; }
+        td { border: 1px solid #555; padding: 3px 8px; min-width: 40px; }
+        .suma { background: #fdf6c9; white-space: nowrap; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 19</h1>
+    <p class="enunciado">Script que, dado un número de filas y de columnas, escribe una tabla con los números
+        de mayor a menor, la suma de cada fila al final de la fila y la suma de cada columna en la última fila
+        (como en el ejemplo con filas = 4 y columnas = 5).</p>
+
+    <script>
+        // Pide un número entero entre minimo y maximo (incluidos).
+        // Si no es válido lo vuelve a pedir. Devuelve null si el usuario pulsa "Cancelar".
+        function pedirEntero(mensaje, minimo, maximo) {
+            let texto = prompt(mensaje);
+            while (texto !== null) {
+                let numero = Number(texto);
+                if (texto.trim() !== "" && Number.isInteger(numero) && numero >= minimo && numero <= maximo) {
+                    return numero;
+                }
+                texto = prompt("«" + texto + "» no es válido.\n" + mensaje);
+            }
+            return null;
+        }
+
+        let filas = pedirEntero("Número de filas (de 1 a 30):", 1, 30);
+        let columnas = null;
+        if (filas !== null) {
+            columnas = pedirEntero("Número de columnas (de 1 a 30):", 1, 30);
+        }
+
+        if (filas === null || columnas === null) {
+            document.write("<p class='aviso'>Has cancelado. Recarga la página (F5) para empezar de nuevo.</p>");
+        } else {
+            // Empezamos por el número más alto (filas × columnas) y vamos bajando hasta el 1
+            let numero = filas * columnas;
+
+            // Array para ir acumulando la suma de cada columna (empiezan todas a 0)
+            let sumasColumnas = [];
+            for (let c = 0; c < columnas; c++) {
+                sumasColumnas[c] = 0;
+            }
+            let sumaTotal = 0;
+
+            let html = "<table>";
+
+            for (let f = 1; f <= filas; f++) {
+                html += "<tr>";
+                let sumaFila = 0;
+
+                for (let c = 0; c < columnas; c++) {
+                    html += "<td>" + numero + "</td>";
+                    sumaFila += numero;           // suma de la fila
+                    sumasColumnas[c] += numero;   // suma de la columna c
+                    numero--;
+                }
+
+                sumaTotal += sumaFila;
+                html += "<td class='suma'>Suma(fil" + f + ")=" + sumaFila + "</td>";
+                html += "</tr>";
+            }
+
+            // Última fila: la suma de cada columna y, al final, la suma total
+            // (en el ejemplo aparece como "Suma(fil5)=210": la fila siguiente a la última)
+            html += "<tr>";
+            for (let c = 0; c < columnas; c++) {
+                html += "<td class='suma'>Suma(col" + (c + 1) + ")=" + sumasColumnas[c] + "</td>";
+            }
+            html += "<td class='suma'><strong>Suma(fil" + (filas + 1) + ")=" + sumaTotal + "</strong></td>";
+            html += "</tr>";
+            html += "</table>";
+
+            document.write("<p>Filas = " + filas + ", columnas = " + columnas + "</p>");
+            document.write(html);
+        }
+    </script>
+</body>
+</html>

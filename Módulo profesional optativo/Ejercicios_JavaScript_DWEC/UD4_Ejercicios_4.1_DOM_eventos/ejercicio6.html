@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 6 - Saludos con setInterval</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+        button { font-size: 1.1em; padding: 0.4em 1.2em; margin-right: 0.5em; cursor: pointer; }
+        #estado { font-size: 1.1em; margin-top: 1em; }
+    </style>
+    <script src="ejercicio6.js" defer></script>
+</head>
+<body>
+    <h1>Ejercicio 6</h1>
+    <p class="enunciado">Dos botones: "Comenzar Saludos" lanza un <code>setInterval</code> que cada 5 segundos
+        muestra un alert con "Hola", y "Parar Saludos" para esa secuencia.</p>
+
+    <button id="comenzar">Comenzar Saludos</button>
+    <button id="parar">Parar Saludos</button>
+
+    <p id="estado">Saludos parados.</p>
+</body>
+</html>

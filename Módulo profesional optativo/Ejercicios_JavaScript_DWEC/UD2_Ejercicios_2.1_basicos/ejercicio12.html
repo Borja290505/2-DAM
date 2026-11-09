@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 12 - Comillas simples y dobles</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 12</h1>
+    <p class="enunciado">Script que muestra el mensaje
+        <em>Hola mundo! Que fácil es incluir 'comillas simples' y "comillas dobles"</em>,
+        todo en una única cadena.</p>
+
+    <script>
+        // Todo el texto va en UNA sola cadena.
+        // La cadena está delimitada con comillas dobles, así que las comillas dobles de dentro
+        // hay que "escaparlas" con la barra invertida (\") para que no cierren la cadena.
+        // Las comillas simples se pueden poner tal cual dentro de una cadena con comillas dobles.
+        let mensaje = "Hola mundo! Que fácil es incluir 'comillas simples' y \"comillas dobles\"";
+
+        // Lo mostramos en un cuadro de diálogo, como en la imagen del enunciado...
+        alert(mensaje);
+
+        // ...y también en la página
+        document.write("<p>" + mensaje + "</p>");
+    </script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 5 - Calendario con festivos</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+        .aviso { color: #b00020; }
+
+        /* Estilo parecido al de la imagen del enunciado */
+        h2 { font-family: "Times New Roman", serif; margin-bottom: 0.2em; }
+        .calendario { border: 2px solid #000; border-spacing: 2px; font-family: "Times New Roman", serif; font-size: 1.1em; }
+        .calendario th, .calendario td { border: 2px solid #000; padding: 2px 6px; min-width: 70px; height: 1.6em; text-align: left; }
+        .festivo { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 5</h1>
+    <p class="enunciado">Calendario del mes que elija el usuario, con los días festivos en rojo.
+        Los festivos están en un array doble indexado por el número de mes (0 a 11).</p>
+
+    <script>
+        // Año del calendario: los festivos que tenemos son los de 2025
+        const ANYO = 2025;
+
+        // Festivos de 2025. Cada posición del array es un mes (0 = enero ... 11 = diciembre)
+        // y dentro tiene los días festivos de ese mes. Ejemplo: festivos[0] = [1, 6] → 1 y 6 de enero.
+        var festivos = [[1, 6], [], [], [17, 18, 23], [1], [], [], [15], [], [12], [1], [6, 8, 25]];
+
+        const MESES = ["enero", "febrero", "marzo", "abril", "mayo", "junio",
+                       "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+        const DIAS_SEMANA = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
+
+        // Pide el mes al usuario (número del 1 al 12 o su nombre).
+        // Devuelve el mes de 0 a 11, o null si el usuario pulsa "Cancelar".
+        function pedirMes() {
+            let texto = prompt("¿De qué mes quieres ver el calendario?\n(escribe un número del 1 al 12 o el nombre del mes)");
+            while (texto !== null) {
+                let limpio = texto.trim().toLowerCase();
+                let numero = Number(limpio);
+
+                if (limpio !== "" && Number.isInteger(numero) && numero >= 1 && numero <= 12) {
+                    return numero - 1;   // el usuario cuenta de 1 a 12, JavaScript de 0 a 11
+                }
+                let posicion = MESES.indexOf(limpio);   // por si ha escrito el nombre del mes
+                if (posicion !== -1) {
+                    return posicion;
+                }
+                texto = prompt("«" + texto + "» no es un mes válido.\nEscribe un número del 1 al 12 o el nombre del mes:");
+            }
+            return null;
+        }
+
+        // Devuelve el HTML de la tabla con el calendario del mes indicado (0-11)
+        function crearCalendario(mes) {
+            // ¿En qué día de la semana cae el día 1? getDay() devuelve 0 = domingo ... 6 = sábado,
+            // pero nuestra semana empieza en lunes, así que lo pasamos a 0 = lunes ... 6 = domingo.
+            let primerDia = new Date(ANYO, mes, 1);
+            let huecos = (primerDia.getDay() + 6) % 7;
+
+            // Días que tiene el mes: el "día 0" del mes siguiente es el último día de este mes
+            let diasDelMes = new Date(ANYO, mes + 1, 0).getDate();
+
+            let html = "<h2>" + MESES[mes].toUpperCase() + " " + ANYO + "</h2>";
+            html += "<table class='calendario'><tr>";
+            for (let i = 0; i < DIAS_SEMANA.length; i++) {
+                html += "<th>" + DIAS_SEMANA[i] + "</th>";
+            }
+            html += "</tr><tr>";
+
+            // Celdas vacías antes del día 1
+            let celda = 0;
+            for (let i = 0; i < huecos; i++) {
+                html += "<td></td>";
+                celda++;
+            }
+
+            // Un <td> por cada día del mes
+            for (let dia = 1; dia <= diasDelMes; dia++) {
+                // Cada 7 celdas empieza una semana nueva (fila nueva)
+                if (celda > 0 && celda % 7 === 0) {
+                    html += "</tr><tr>";
+                }
+                // Si el día está en el array de festivos de ese mes, lo pintamos en rojo
+                if (festivos[mes].includes(dia)) {
+                    html += "<td class='festivo'>" + dia + "</td>";
+                } else {
+                    html += "<td>" + dia + "</td>";
+                }
+                celda++;
+            }
+
+            // Celdas vacías para completar la última semana
+            while (celda % 7 !== 0) {
+                html += "<td></td>";
+                celda++;
+            }
+
+            html += "</tr></table>";
+            return html;
+        }
+
+        let mes = pedirMes();
+
+        if (mes === null) {
+            document.write("<p class='aviso'>Has cancelado. Recarga la página (F5) para elegir un mes.</p>");
+        } else {
+            document.write(crearCalendario(mes));
+
+            if (festivos[mes].length === 0) {
+                document.write("<p>Este mes no hay días festivos.</p>");
+            } else {
+                document.write("<p><span class='festivo'>En rojo</span>: días festivos (" + festivos[mes].join(", ") + ").</p>");
+            }
+        }
+    </script>
+</body>
+</html>

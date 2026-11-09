@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 4 - Operaciones con if y con switch</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 4</h1>
+    <p class="enunciado">Script con dos variables numéricas que pregunta al usuario qué operación quiere
+        realizar y escribe en la página la operación completa con su resultado.
+        Se resuelve primero con <code>if</code> y después con <code>switch</code>.</p>
+
+    <script>
+        // Dos variables con datos numéricos
+        const numero1 = 20;
+        const numero2 = 5;
+
+        // Preguntamos al usuario qué operación quiere hacer
+        let operacion = prompt("Los números son " + numero1 + " y " + numero2 + ".\n" +
+            "¿Qué operación quieres realizar? Escribe + - * /\n" +
+            "(también vale: suma, resta, multiplicación o división)");
+
+        // Si pulsa Cancelar, prompt devuelve null: lo dejamos como cadena vacía
+        if (operacion === null) {
+            operacion = "";
+        }
+        // Quitamos espacios y pasamos a minúsculas para poder comparar sin problemas
+        operacion = operacion.trim().toLowerCase();
+
+        document.write("<p>Números: <strong>" + numero1 + "</strong> y <strong>" + numero2 +
+            "</strong>. Operación elegida: <strong>" + operacion + "</strong></p>");
+
+        // ===================== 1) Versión con IF =====================
+        let resultadoIf;
+
+        if (operacion === "+" || operacion === "suma") {
+            resultadoIf = numero1 + " + " + numero2 + " = " + (numero1 + numero2);
+        } else if (operacion === "-" || operacion === "resta") {
+            resultadoIf = numero1 + " - " + numero2 + " = " + (numero1 - numero2);
+        } else if (operacion === "*" || operacion === "x" || operacion === "multiplicación" || operacion === "multiplicacion") {
+            resultadoIf = numero1 + " * " + numero2 + " = " + (numero1 * numero2);
+        } else if (operacion === "/" || operacion === "división" || operacion === "division") {
+            resultadoIf = numero1 + " / " + numero2 + " = " + (numero1 / numero2);
+        } else {
+            resultadoIf = "Operación no válida";
+        }
+
+        document.write("<h2>Con if</h2>");
+        document.write("<p>" + resultadoIf + "</p>");
+
+        // ===================== 2) Versión con SWITCH =====================
+        // Varios "case" seguidos sin break comparten el mismo código
+        let resultadoSwitch;
+
+        switch (operacion) {
+            case "+":
+            case "suma":
+                resultadoSwitch = numero1 + " + " + numero2 + " = " + (numero1 + numero2);
+                break;
+            case "-":
+            case "resta":
+                resultadoSwitch = numero1 + " - " + numero2 + " = " + (numero1 - numero2);
+                break;
+            case "*":
+            case "x":
+            case "multiplicación":
+            case "multiplicacion":
+                resultadoSwitch = numero1 + " * " + numero2 + " = " + (numero1 * numero2);
+                break;
+            case "/":
+            case "división":
+            case "division":
+                resultadoSwitch = numero1 + " / " + numero2 + " = " + (numero1 / numero2);
+                break;
+            default:
+                resultadoSwitch = "Operación no válida";
+        }
+
+        document.write("<h2>Con switch</h2>");
+        document.write("<p>" + resultadoSwitch + "</p>");
+    </script>
+</body>
+</html>

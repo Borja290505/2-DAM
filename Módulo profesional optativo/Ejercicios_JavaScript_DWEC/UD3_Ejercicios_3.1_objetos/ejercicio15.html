@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 15 - Edad actual</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+        input, button { font-size: 1.1em; padding: 0.3em 0.6em; }
+        #resultado { font-size: 1.3em; margin-top: 1em; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 15</h1>
+    <p class="enunciado">Script que devuelve la edad actual de una persona a partir de su fecha de nacimiento.</p>
+
+    <label for="nacimiento">Fecha de nacimiento:</label>
+    <input type="date" id="nacimiento">
+    <button onclick="mostrarEdad()">Calcular edad</button>
+
+    <p id="resultado"></p>
+
+    <script>
+        // Añade un 0 delante si el número tiene una sola cifra: 5 → "05"
+        function dosCifras(numero) {
+            return String(numero).padStart(2, "0");
+        }
+
+        // Calcula la edad: años de diferencia, y uno menos si este año todavía no ha cumplido
+        function calcularEdad(nacimiento, hoy) {
+            let edad = hoy.getFullYear() - nacimiento.getFullYear();
+
+            let mesHoy = hoy.getMonth();
+            let diaHoy = hoy.getDate();
+            let mesNacimiento = nacimiento.getMonth();
+            let diaNacimiento = nacimiento.getDate();
+
+            // ¿Todavía no ha llegado el cumpleaños de este año?
+            if (mesHoy < mesNacimiento || (mesHoy === mesNacimiento && diaHoy < diaNacimiento)) {
+                edad--;
+            }
+            return edad;
+        }
+
+        function mostrarEdad() {
+            let valor = document.getElementById("nacimiento").value;   // "aaaa-mm-dd"
+            let resultado = document.getElementById("resultado");
+
+            if (valor === "") {
+                resultado.textContent = "Elige primero tu fecha de nacimiento.";
+                return;
+            }
+
+            let partes = valor.split("-");
+            let nacimiento = new Date(Number(partes[0]), Number(partes[1]) - 1, Number(partes[2]));
+            let hoy = new Date();
+
+            if (nacimiento > hoy) {
+                resultado.textContent = "La fecha de nacimiento no puede ser posterior a hoy.";
+                return;
+            }
+
+            let edad = calcularEdad(nacimiento, hoy);
+            resultado.innerHTML = "Tienes <strong>" + edad + "</strong> " + (edad === 1 ? "año" : "años") + ".";
+
+            // Si hoy es su cumpleaños, se lo decimos
+            if (hoy.getMonth() === nacimiento.getMonth() && hoy.getDate() === nacimiento.getDate()) {
+                resultado.innerHTML += " ¡Feliz cumpleaños! 🎉";
+            }
+        }
+
+        // El calendario no deja elegir días posteriores a hoy
+        let hoy = new Date();
+        document.getElementById("nacimiento").max =
+            hoy.getFullYear() + "-" + dosCifras(hoy.getMonth() + 1) + "-" + dosCifras(hoy.getDate());
+    </script>
+</body>
+</html>

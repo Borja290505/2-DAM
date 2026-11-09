@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 13 - Fecha en texto</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+        input, button { font-size: 1.1em; padding: 0.3em 0.6em; }
+        strong { font-size: 1.15em; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 13</h1>
+    <p class="enunciado">Script que, al pasarle un objeto Date, genera una cadena con el formato
+        "día de la semana, dd de mes de aaaa", por ejemplo: <em>jueves, 26 de noviembre de 2015</em>.</p>
+
+    <p>Ejemplo del enunciado (26/11/2015): <strong id="ejemplo"></strong></p>
+    <p>Hoy: <strong id="hoy"></strong></p>
+
+    <p>
+        <label for="fecha">Prueba con otra fecha:</label>
+        <input type="date" id="fecha">
+        <button onclick="mostrarOtraFecha()">Convertir</button>
+    </p>
+    <p><strong id="resultado"></strong></p>
+
+    <script>
+        const DIAS_SEMANA = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
+        const MESES = ["enero", "febrero", "marzo", "abril", "mayo", "junio",
+                       "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+
+        // Recibe un objeto Date y devuelve, por ejemplo, "jueves, 26 de noviembre de 2015".
+        // getDay() devuelve el día de la semana (0 = domingo ... 6 = sábado)
+        // y getMonth() el mes (0 = enero ... 11 = diciembre): los usamos como posición en los arrays.
+        function fechaEnTexto(fecha) {
+            return DIAS_SEMANA[fecha.getDay()] + ", " + fecha.getDate() + " de " +
+                   MESES[fecha.getMonth()] + " de " + fecha.getFullYear();
+        }
+
+        // Fecha del enunciado: el mes 10 es noviembre (los meses empiezan en 0)
+        document.getElementById("ejemplo").textContent = fechaEnTexto(new Date(2015, 10, 26));
+
+        // Fecha de hoy
+        document.getElementById("hoy").textContent = fechaEnTexto(new Date());
+
+        // Fecha elegida en el calendario
+        function mostrarOtraFecha() {
+            let valor = document.getElementById("fecha").value;   // "aaaa-mm-dd"
+            let resultado = document.getElementById("resultado");
+
+            if (valor === "") {
+                resultado.textContent = "Elige primero una fecha.";
+                return;
+            }
+            let partes = valor.split("-");
+            let fecha = new Date(Number(partes[0]), Number(partes[1]) - 1, Number(partes[2]));
+            resultado.textContent = fechaEnTexto(fecha);
+        }
+    </script>
+</body>
+</html>

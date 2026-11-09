@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 11 - Tiempo entre dos botones</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+        button { font-size: 1.1em; padding: 0.4em 1.2em; margin-right: 0.5em; cursor: pointer; }
+        #resultado { font-size: 1.2em; margin-top: 1em; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 11</h1>
+    <p class="enunciado">Calcula, con objetos Date, el tiempo transcurrido entre la pulsación de los botones
+        "Empezar a contar" y "Finalizar".</p>
+
+    <button onclick="empezar()">Empezar a contar</button>
+    <button onclick="finalizar()">Finalizar</button>
+
+    <p id="resultado"></p>
+
+    <script>
+        let inicio = null;   // Date del momento en que se pulsa "Empezar a contar"
+
+        function empezar() {
+            inicio = new Date();   // new Date() sin parámetros = fecha y hora actuales
+            document.getElementById("resultado").innerHTML =
+                "Contando desde las <strong>" + inicio.toLocaleTimeString("es-ES") + "</strong>... pulsa «Finalizar» para parar.";
+        }
+
+        function finalizar() {
+            let resultado = document.getElementById("resultado");
+
+            if (inicio === null) {
+                resultado.textContent = "Primero tienes que pulsar «Empezar a contar».";
+                return;
+            }
+
+            let fin = new Date();
+
+            // Al restar dos objetos Date obtenemos la diferencia en milisegundos
+            let milisegundos = fin - inicio;
+
+            // Pasamos los milisegundos a horas, minutos, segundos y milisegundos
+            let horas = Math.floor(milisegundos / 3600000);
+            let minutos = Math.floor((milisegundos % 3600000) / 60000);
+            let segundos = Math.floor((milisegundos % 60000) / 1000);
+            let ms = milisegundos % 1000;
+
+            resultado.innerHTML =
+                "Inicio: " + inicio.toLocaleTimeString("es-ES") + "<br>" +
+                "Fin: " + fin.toLocaleTimeString("es-ES") + "<br>" +
+                "<strong>Tiempo transcurrido: " + horas + " h " + minutos + " min " + segundos + " s " + ms + " ms</strong>" +
+                " (" + (milisegundos / 1000).toFixed(3).replace(".", ",") + " segundos)";
+
+            inicio = null;   // así se puede volver a medir
+        }
+    </script>
+</body>
+</html>

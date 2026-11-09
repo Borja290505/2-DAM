@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3 - 100 checkbox</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+        button { font-size: 1.1em; padding: 0.4em 1.2em; margin-right: 0.5em; cursor: pointer; }
+        #contador { margin-left: 1em; font-weight: bold; }
+
+        /* Las casillas en una rejilla de 10 columnas */
+        #casillas { display: grid; grid-template-columns: repeat(10, 80px); gap: 6px; margin-top: 1em; }
+        #casillas label { cursor: pointer; }
+    </style>
+    <script src="ejercicio3.js" defer></script>
+</head>
+<body>
+    <h1>Ejercicio 3</h1>
+    <p class="enunciado">Crea 100 elementos "checkbox" con números aleatorios. La página tiene un botón
+        "Marcar todos" y otro "Desmarcar todos".</p>
+
+    <p>
+        <button id="marcar">Marcar todos</button>
+        <button id="desmarcar">Desmarcar todos</button>
+        <span id="contador"></span>
+    </p>
+
+    <div id="casillas"></div>
+</body>
+</html>

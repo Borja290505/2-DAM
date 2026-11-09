@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Práctica 5 - Galería de colores con this</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2em; }
+        .muestra { width: 70px; height: 70px; display: inline-block; margin: 5px; cursor: pointer; border: 3px solid transparent; }
+        .muestra:hover { border-color: #333; }
+        #grande { width: 360px; height: 180px; margin-top: 1em; border: 2px solid #333; background: #eee;
+                  color: white; font-size: 1.4em; text-align: center; line-height: 180px; }
+    </style>
+</head>
+<body>
+    <h1>Práctica 5: vista previa con <code>this</code></h1>
+    <p>Al pasar el ratón por una muestra se ve en grande; al hacer clic se queda fijada.</p>
+
+    <div class="muestra" style="background: #e63946" data-nombre="Rojo"></div>
+    <div class="muestra" style="background: #2a9d8f" data-nombre="Verde azulado"></div>
+    <div class="muestra" style="background: #264653" data-nombre="Azul oscuro"></div>
+    <div class="muestra" style="background: #f4a261" data-nombre="Naranja"></div>
+    <div class="muestra" style="background: #8338ec" data-nombre="Morado"></div>
+
+    <div id="grande">Elige un color</div>
+
+    <script>
+        var grande = document.getElementById("grande");
+        var fijado = null;   // muestra elegida con clic
+
+        // Pone en la caja grande el color y el nombre del elemento que recibe (this)
+        function mostrar(elemento) {
+            grande.style.background = elemento.style.background;
+            grande.textContent = elemento.dataset.nombre;   // atributo data-nombre
+        }
+
+        function alEntrar() { mostrar(this); }
+
+        // Al salir volvemos al color fijado (si lo hay)
+        function alSalir() {
+            if (fijado !== null) {
+                mostrar(fijado);
+            } else {
+                grande.style.background = "#eee";
+                grande.textContent = "Elige un color";
+            }
+        }
+
+        function alHacerClic() {
+            fijado = this;
+            mostrar(this);
+        }
+
+        var muestras = document.getElementsByClassName("muestra");
+        for (var i = 0; i < muestras.length; i++) {
+            muestras[i].addEventListener("mouseover", alEntrar);
+            muestras[i].addEventListener("mouseout", alSalir);
+            muestras[i].addEventListener("click", alHacerClic);
+        }
+    </script>
+</body>
+</html>

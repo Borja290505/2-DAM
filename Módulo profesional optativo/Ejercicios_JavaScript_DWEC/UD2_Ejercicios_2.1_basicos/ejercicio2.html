@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2 - Par o impar</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+        .aviso { color: #b00020; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 2</h1>
+    <p class="enunciado">Script que pide al usuario un número y muestra en la página un párrafo
+        indicando si el número es par o impar.</p>
+
+    <script>
+        // Pedimos el número (prompt siempre devuelve un texto, o null si se pulsa Cancelar)
+        let texto = prompt("Introduce un número entero:");
+        let numero = Number(texto);
+
+        // Antes de nada comprobamos que ha escrito un número entero
+        if (texto === null || texto.trim() === "" || !Number.isInteger(numero)) {
+            document.write("<p class='aviso'>No has introducido un número entero, así que no se puede saber si es par o impar.</p>");
+        } else if (numero % 2 === 0) {
+            // Si el resto de dividir entre 2 es 0, el número es par
+            document.write("<p>El número <strong>" + numero + "</strong> es <strong>PAR</strong>.</p>");
+        } else {
+            // Si no, es impar
+            document.write("<p>El número <strong>" + numero + "</strong> es <strong>IMPAR</strong>.</p>");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 17 - Tipo de carácter</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin: 2em; line-height: 1.5; }
+        .enunciado { background: #f4f4f4; border-left: 5px solid #f0db4f; padding: 0.6em 1em; }
+        .aviso { color: #b00020; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 17</h1>
+    <p class="enunciado">Script que, dado un carácter, dice si es un número, una vocal o una consonante,
+        si está en mayúsculas, o si es otro tipo de carácter. Se usa <code>switch</code>.</p>
+
+    <script>
+        // Pedimos un único carácter
+        let caracter = prompt("Introduce un carácter:");
+        while (caracter !== null && caracter.length !== 1) {
+            caracter = prompt("Tiene que ser UN solo carácter.\nIntroduce un carácter:");
+        }
+
+        if (caracter === null) {
+            document.write("<p class='aviso'>Has cancelado. Recarga la página (F5) para empezar de nuevo.</p>");
+        } else {
+            let tipo;   // "número", "vocal", "consonante" u "otro"
+
+            // Comparamos en minúsculas para no tener que repetir cada letra en mayúscula
+            switch (caracter.toLowerCase()) {
+                case "0": case "1": case "2": case "3": case "4":
+                case "5": case "6": case "7": case "8": case "9":
+                    tipo = "número";
+                    break;
+                case "a": case "e": case "i": case "o": case "u":
+                case "á": case "é": case "í": case "ó": case "ú": case "ü":
+                    tipo = "vocal";
+                    break;
+                default:
+                    // Si el carácter cambia al pasarlo a mayúsculas o minúsculas es una letra.
+                    // Como no es vocal, es una consonante (incluida la ñ).
+                    if (caracter.toUpperCase() !== caracter.toLowerCase()) {
+                        tipo = "consonante";
+                    } else {
+                        tipo = "otro";
+                    }
+            }
+
+            // Una letra está en mayúsculas si no cambia al pasarla a mayúsculas
+            let enMayusculas = (caracter === caracter.toUpperCase());
+
+            let descripcion;
+            switch (tipo) {
+                case "número":
+                    descripcion = "es un <strong>número</strong>";
+                    break;
+                case "vocal":
+                case "consonante":
+                    descripcion = "es una <strong>" + tipo + "</strong> y está en <strong>" +
+                                  (enMayusculas ? "mayúsculas" : "minúsculas") + "</strong>";
+                    break;
+                default:
+                    descripcion = "es <strong>otro tipo de carácter</strong> (no es número ni letra)";
+            }
+
+            document.write("<p>El carácter «" + caracter + "» " + descripcion + ".</p>");
+        }
+    </script>
+</body>
+</html>
