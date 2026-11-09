@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Simulacro - Ejercicio 2: Analizador de frases</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2em; }
+        li { margin: 0.3em 0; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 2: Analizador de frases</h1>
+
+    <script>
+        // Quita los signos de puntuación de una palabra: "perro." → "perro"
+        function limpiar(palabra) {
+            return palabra.replace(/[.,;:¿?¡!"'()]/g, "");
+        }
+
+        let frase = prompt("Escribe una frase:");
+
+        if (frase === null || frase.trim() === "") {
+            document.write("<p>No has escrito ninguna frase.</p>");
+        } else {
+            // 1. Palabras: trim() quita espacios de los extremos y split(/\s+/) corta
+            //    por uno o VARIOS espacios seguidos (con split(" ") saldrían palabras vacías)
+            let palabras = frase.trim().split(/\s+/);
+
+            // 2. Palabra más larga (sin contar los signos). Con ">" y no ">=" se queda la primera si hay empate
+            let masLarga = limpiar(palabras[0]);
+            for (let i = 1; i < palabras.length; i++) {
+                let p = limpiar(palabras[i]);
+                if (p.length > masLarga.length) {
+                    masLarga = p;
+                }
+            }
+
+            // 3. Vocales: recorremos la frase carácter a carácter (también con tilde y ü)
+            let vocales = 0;
+            let listaVocales = "aeiouáéíóúü";
+            let minusculas = frase.toLowerCase();
+            for (let i = 0; i < minusculas.length; i++) {
+                if (listaVocales.includes(minusculas.charAt(i))) {
+                    vocales++;
+                }
+            }
+
+            // 4. Sin repetir y ordenadas: en minúsculas y sin signos, solo añadimos las que no estén ya
+            let unicas = [];
+            for (let i = 0; i < palabras.length; i++) {
+                let p = limpiar(palabras[i]).toLowerCase();
+                if (p !== "" && !unicas.includes(p)) {
+                    unicas.push(p);
+                }
+            }
+            unicas.sort(function (a, b) {
+                return a.localeCompare(b, "es");   // orden alfabético en español (tildes, ñ)
+            });
+
+            // 5. Orden inverso: slice() hace una copia para no estropear el array original
+            let invertida = palabras.slice().reverse().join(" ");
+
+            document.write("<p>Frase: <strong>" + frase + "</strong></p>");
+            document.write("<ul>");
+            document.write("<li>Número de palabras: " + palabras.length + "</li>");
+            document.write("<li>Palabra más larga: " + masLarga + "</li>");
+            document.write("<li>Número de vocales: " + vocales + "</li>");
+            document.write("<li>Sin repetir y ordenadas: " + unicas.join(", ") + "</li>");
+            document.write("<li>En orden inverso: " + invertida + "</li>");
+            document.write("</ul>");
+        }
+    </script>
+</body>
+</html>

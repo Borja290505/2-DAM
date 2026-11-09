@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Simulacro - Ejercicio 1: Estadísticas de números</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2em; }
+        table { border-collapse: collapse; }
+        th, td { border: 1px solid #999; padding: 5px 14px; text-align: left; }
+        th { background: #f0db4f; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 1: Estadísticas de números</h1>
+
+    <script>
+        let numeros = [];
+        let mensaje = "Introduce un número entero (0 para terminar):";
+
+        // 1. Pedimos números hasta que escriba 0 (o pulse Cancelar)
+        while (true) {
+            let texto = prompt(mensaje);
+            if (texto === null) {
+                break;                       // Cancelar = terminar
+            }
+            let numero = Number(texto);
+
+            // Validación: tiene que ser un entero. Si no, avisamos y NO lo contamos
+            if (texto.trim() === "" || !Number.isInteger(numero)) {
+                alert("«" + texto + "» no es un número entero. Vuelve a intentarlo.");
+                continue;
+            }
+            if (numero === 0) {
+                break;                       // el 0 termina y no cuenta
+            }
+            numeros.push(numero);
+            mensaje = "Llevas " + numeros.length + " número(s). Introduce otro (0 para terminar):";
+        }
+
+        // 2. Resultados
+        if (numeros.length === 0) {
+            document.write("<p>No has introducido ningún número.</p>");
+        } else {
+            let pares = 0;
+            let suma = 0;
+            let mayor = numeros[0];          // empezamos con el primero, NO con 0 (puede haber negativos)
+            let menor = numeros[0];
+
+            for (let i = 0; i < numeros.length; i++) {
+                if (numeros[i] % 2 === 0) {
+                    pares++;
+                }
+                suma += numeros[i];
+                if (numeros[i] > mayor) mayor = numeros[i];
+                if (numeros[i] < menor) menor = numeros[i];
+            }
+
+            document.write("<p>Números: " + numeros.join(", ") + "</p>");
+            document.write("<table>" +
+                "<tr><th>Cantidad</th><td>" + numeros.length + "</td></tr>" +
+                "<tr><th>Pares</th><td>" + pares + "</td></tr>" +
+                "<tr><th>Impares</th><td>" + (numeros.length - pares) + "</td></tr>" +
+                "<tr><th>Mayor</th><td>" + mayor + "</td></tr>" +
+                "<tr><th>Menor</th><td>" + menor + "</td></tr>" +
+                "<tr><th>Suma</th><td>" + suma + "</td></tr>" +
+                "</table>");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Simulacro - Ejercicio 3: Mi próximo cumpleaños</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2em; }
+        input, button { font-size: 1.1em; padding: 4px 8px; }
+        #resultado { font-size: 1.2em; line-height: 1.7; margin-top: 1em; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 3: Mi próximo cumpleaños</h1>
+
+    <label for="nacimiento">Fecha de nacimiento:</label>
+    <input type="date" id="nacimiento">
+    <button onclick="calcular()">Calcular</button>
+
+    <p id="resultado"></p>
+
+    <script>
+        const DIAS = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
+        const MESES = ["enero", "febrero", "marzo", "abril", "mayo", "junio",
+                       "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+        const MS_POR_DIA = 24 * 60 * 60 * 1000;
+
+        // "jueves, 26 de noviembre de 2026"
+        function fechaEnTexto(fecha) {
+            return DIAS[fecha.getDay()] + ", " + fecha.getDate() + " de " +
+                   MESES[fecha.getMonth()] + " de " + fecha.getFullYear();
+        }
+
+        // Si el 29 de febrero de ese año existe, es bisiesto (si no, Date lo pasa al 1 de marzo)
+        function esBisiesto(anyo) {
+            return new Date(anyo, 1, 29).getMonth() === 1;
+        }
+
+        function calcular() {
+            let valor = document.getElementById("nacimiento").value;   // "aaaa-mm-dd"
+            let resultado = document.getElementById("resultado");
+
+            // Caso 1: no ha elegido fecha
+            if (valor === "") {
+                resultado.textContent = "Elige primero tu fecha de nacimiento.";
+                return;
+            }
+
+            let partes = valor.split("-");
+            let nacimiento = new Date(Number(partes[0]), Number(partes[1]) - 1, Number(partes[2]));
+
+            // Hoy a las 00:00, para comparar solo días (sin horas)
+            let ahora = new Date();
+            let hoy = new Date(ahora.getFullYear(), ahora.getMonth(), ahora.getDate());
+
+            // Caso 2: fecha futura
+            if (nacimiento > hoy) {
+                resultado.textContent = "La fecha de nacimiento no puede ser posterior a hoy.";
+                return;
+            }
+
+            // Edad: diferencia de años, uno menos si este año aún no ha cumplido
+            let edad = hoy.getFullYear() - nacimiento.getFullYear();
+            if (hoy.getMonth() < nacimiento.getMonth() ||
+                (hoy.getMonth() === nacimiento.getMonth() && hoy.getDate() < nacimiento.getDate())) {
+                edad--;
+            }
+
+            // Próximo cumpleaños: el de este año; si ya ha pasado, el del año que viene
+            // (si nació un 29 de febrero y el año no es bisiesto, Date lo pasa al 1 de marzo)
+            let cumple = new Date(hoy.getFullYear(), nacimiento.getMonth(), nacimiento.getDate());
+            if (cumple < hoy) {
+                cumple = new Date(hoy.getFullYear() + 1, nacimiento.getMonth(), nacimiento.getDate());
+            }
+
+            // Días que faltan: restar dos Date da milisegundos. Math.round evita fallos
+            // con el cambio de hora (hay días de 23 y de 25 horas)
+            let dias = Math.round((cumple - hoy) / MS_POR_DIA);
+
+            let html = "Tienes <strong>" + edad + "</strong> años.<br>";
+            html += "Tu próximo cumpleaños es el <strong>" + fechaEnTexto(cumple) + "</strong>.<br>";
+            if (dias === 0) {
+                html += "<strong>¡Feliz cumpleaños! 🎉</strong><br>";
+            } else {
+                html += "Faltan <strong>" + dias + "</strong> " + (dias === 1 ? "día" : "días") + ".<br>";
+            }
+            html += "El año " + cumple.getFullYear() + (esBisiesto(cumple.getFullYear()) ? " SÍ" : " NO") + " es bisiesto.";
+
+            resultado.innerHTML = html;
+        }
+    </script>
+</body>
+</html>

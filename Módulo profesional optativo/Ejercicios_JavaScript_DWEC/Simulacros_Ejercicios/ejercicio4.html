@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Simulacro - Ejercicio 4: Lista de tareas</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2em; }
+        input, button { font-size: 1.1em; padding: 4px 8px; }
+        li { font-size: 1.15em; margin: 0.3em 0; cursor: pointer; user-select: none; }
+        .hecha { text-decoration: line-through; color: #999; }
+        #aviso { color: red; font-weight: bold; min-height: 1.2em; }
+    </style>
+    <script src="ejercicio4.js" defer></script>
+</head>
+<body>
+    <h1>Ejercicio 4: Lista de tareas</h1>
+    <p>Clic en una tarea: tachar / destachar. Doble clic: eliminar.</p>
+
+    <input type="text" id="texto" placeholder="Nueva tarea">
+    <button id="anadir">Añadir</button>
+    <button id="borrarHechas">Borrar completadas</button>
+
+    <p id="aviso"></p>
+    <ul id="lista"></ul>
+    <p id="contador"></p>
+</body>
+</html>
