@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+        .caja{
+            width: 200px;
+            padding: 20px;
+            margin: 10px;
+            background-color: lightblue;
+            border: 1px solid rgb(9, 255, 0);
+            border-radius: 8px;
+        }
+        .alargar{
+            width: 300px;
+            padding: 20px;
+            margin: 10px;
+            background-color: 000;
+            border: 1px solid blue;
+            border-radius: 8px;
+		}
+    </style>
+<body>
+    <h1>Crear elementos DIV</h1>
+
+    <button id="anadir">Crear DIV</button>
+    <button id="contar">Contar</button>
+    <div id="contenedor"></div>
+
+    <ul id="lista"></ul>
+    <p id="contador"></p>
+    <script>
+        
+    document.addEventListener("DOMContentLoaded", () => {
+    const btnAnadir = document.getElementById("anadir");
+    const btnContar = document.getElementById("contar");
+    const contenedor = document.getElementById("contenedor");
+    const contadorTexto = document.getElementById("contador");
+
+    // Función para actualizar el texto del contador de DIVs existentes
+    function actualizarContador() {
+        const totalDivs = contenedor.querySelectorAll(".caja, .alargar").length;
+        contadorTexto.textContent = `Total de DIVs: ${totalDivs}`;
+    }
+
+    // 1. Crear el DIV con sus estilos y eventos al hacer clic en "Crear DIV"
+    btnAnadir.addEventListener("click", () => {
+        const nuevoDiv = document.createElement("div");
+        
+        // Aplicar el estilo inicial
+        nuevoDiv.classList.add("caja");
+        nuevoDiv.textContent = "Soy un DIV";
+
+        // 2. Cambiar de estilo al pasar el cursor (Mouseover / Mouseleave)
+        nuevoDiv.addEventListener("mouseover", () => {
+            nuevoDiv.classList.remove("caja");
+            nuevoDiv.classList.add("alargar");
+        });
+
+        nuevoDiv.addEventListener("mouseleave", () => {
+            nuevoDiv.classList.remove("alargar");
+            nuevoDiv.classList.add("caja");
+        });
+
+        // 3. Borrar al hacer doble clic
+        nuevoDiv.addEventListener("dblclick", () => {
+            nuevoDiv.remove();
+            actualizarContador(); // Recuenta automáticamente al borrar
+        });
+
+        // Añadir el nuevo elemento al contenedor
+        contenedor.appendChild(nuevoDiv);
+        actualizarContador(); // Recuenta automáticamente al añadir
+    });
+
+    // 4. Contar de forma manual al pulsar el botón "Contar"
+    btnContar.addEventListener("click", () => {
+        actualizarContador();
+    });
+});
+    </script>
+</body>
+</html>
