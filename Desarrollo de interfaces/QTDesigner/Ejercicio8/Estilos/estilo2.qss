@@ -1,0 +1,46 @@
+QMainWindow {
+    background-color: #1E1E2E;
+}
+
+QLabel {
+    color: #CDD6F4;
+    font-family: 'Consolas', monospace;
+    font-size: 13px;
+}
+
+QPushButton {
+    background-color: #89B4FA;
+    color: #11111B;
+    border-radius: 6px;
+    padding: 5px 12px;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #B4BEFE;
+}
+
+QPushButton:pressed {
+    background-color: #74C7EC;
+}
+
+QComboBox, QSpinBox {
+    background-color: #313244;
+    color: #CDD6F4;
+    border: 1px solid #45475A;
+    border-radius: 4px;
+    padding: 3px;
+}
+
+QSlider::groove:horizontal {
+    height: 6px;
+    background: #45475A;
+    border-radius: 3px;
+}
+
+QSlider::handle:horizontal {
+    background: #F38BA8;
+    width: 14px;
+    margin: -4px 0;
+    border-radius: 7px;
+}
