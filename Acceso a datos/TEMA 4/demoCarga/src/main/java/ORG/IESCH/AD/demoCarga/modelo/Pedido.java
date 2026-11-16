@@ -1,20 +1,23 @@
 package ORG.IESCH.AD.demoCarga.modelo;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.Data;
-
-import java.time.LocalDateTime;
+import jakarta.persistence.*;
+import lombok.*;
+import java.time.LocalDate;
 
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class Pedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    LocalDateTime fecha;
-    String resumen;
+    private Long id;
+
+    private LocalDate fecha;
+    private String estado;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "direccion_envio_id", nullable = false, unique = true)
+    private DireccionEnvio direccionEnvio;
 }

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1</title>
+</head>
+<body>
+    <script>
+        function calcularLetras(numeroDNI){
+            var letras = ['T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E', 'T'];
+            return letras[numeroDNI%23]
+        }
+
+        function comprobar(){
+            var t = document.getElementById("miTexto");
+            var texto = t.value.toUpperCase();
+
+            var exp = new RegExp(/^\d{8}[A-Z]$/,"i");
+            if(!(exp.test(texto))){
+                console.log("Formato incorrecto")
+                return false;
+            }else{
+                console.log("Formato correcto")
+                t.value=texto
+                var dni = texto.substring(0,8);
+                var letra = texto[8]
+
+                if(letra!=calcularLetras(dni)){
+                    console.log("La letra no coincide con el dni")
+                }else{
+                    console.log("La letra coincide con la del dni")
+                }
+            }
+        }
+    </script>
+
+    <form action="">
+
+    </form>
+    
+</body>
+</html>
