@@ -20,7 +20,7 @@
         android:id="@+id/texto_pregunta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/preguntaEdad"
+        android:text="@string/pregunta_edad"
         android:textSize="24sp"
         android:textStyle="bold"
         android:padding="24dp"
@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
         android:ems="10"
-        android:hint="@string/introduceEdad"
+        android:hint="@string/introduce_tu_edad"
         android:gravity="center"
         android:inputType="number"
         />
@@ -45,8 +45,7 @@
         android:layout_marginVertical="16dp"
         android:backgroundTint="@color/verde_personalizado"
         android:text="@string/calcular"
-        android:textSize="20sp"
-        />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/texto_respuesta"

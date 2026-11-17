@@ -21,28 +21,32 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         // Aquí la pantalla está creada.
-
         // 1 - Tomamos el control de todos los elementos de la parte de la UI
         val resultText = findViewById<TextView>(R.id.texto_respuesta)
         val calculateButton = findViewById<Button>(R.id.boton_calcular)
         val ageEdit = findViewById<EditText>(R.id.edit_edad)
 
-        // 2 - Los botones tiene las propiedad setOnClickListener al pulsarlo
+        // 2 - Los botones tienen la propiedad setOnClickListener al pulsarlo
         calculateButton.setOnClickListener {
-            // Aqui metemos el codigo de lo que queremos hace cuando pulsemos el boton
+            // Aquí metemos el código de lo que queremos hacer cuando pulsemos el botón de Calcular
             val edadString = ageEdit.text.toString()
 
-            //Para comprobar si esta vacio
             if ( edadString.isEmpty() ){
-                // 3 - Mostramos un mensaje de tipo Toast
-                Toast.makeText(this,R.string.textoToast, Toast.LENGTH_LONG).show()
-            }else{
-                //Necesitmos pasar el numero entero
+                //3 - Mostramos un mensaje de tipo Toast
+                Toast.makeText( this, R.string.texto_toast, Toast.LENGTH_LONG).show()
+
+            } else {
+                // Necesitamos pasar el valo a entero
                 val edadInt = edadString.toInt()
                 val dogAge = edadInt * 7
 
-                resultText.text = getString(R.string.resultadotexto, dogAge)
+                //println( dogAge )
+                resultText.text = getString(R.string.resultado_texto, dogAge)
             }
+
+
         }
     }
+
+
 }
