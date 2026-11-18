@@ -34,15 +34,8 @@ QComboBox, QSpinBox {
     padding: 3px;
 }
 
-QSlider::groove:horizontal {
-    height: 6px;
-    background: #BDC3C7;
-    border-radius: 3px;
-}
-
-QSlider::handle:horizontal {
-    background: #3498DB;
-    width: 14px;
-    margin: -4px 0;
-    border-radius: 7px;
+QSlider::handle{
+    background-image: url(img/android.png);
+    width: 16px;
+    height: 16px;
 }

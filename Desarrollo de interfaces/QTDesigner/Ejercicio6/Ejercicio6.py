@@ -1,3 +1,15 @@
+#Para que funcione el modulo
+#python -m venv App (se añadirá contenido a nuestra carpeta)
+#cd App
+#cd Scripts
+#.\activate
+#pip install PyQt6
+# pyuic6 Ej1.ui -o Ej1.py 
+
+#Para que funcione el designer
+# pip install PySide6
+# pyside6-designer
+
 from PyQt6.QtWidgets import QApplication, QComboBox, QDateEdit, QHBoxLayout, QLabel, QLineEdit, QMainWindow, QPushButton, QRadioButton, QTextEdit, QVBoxLayout, QWidget# Se importa solo lo que necesitas
 from PyQt6.QtCore import QDate, QSize, Qt
 

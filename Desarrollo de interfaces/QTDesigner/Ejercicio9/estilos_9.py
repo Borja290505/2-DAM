@@ -1,3 +1,20 @@
+#Para que funcione el modulo
+#python -m venv App (se añadirá contenido a nuestra carpeta)
+#cd App
+#cd Scripts
+#.\activate
+#pip install PyQt6
+
+#Para crear el .ui 
+# pyuic6 Ej1.ui -o Ej1.py 
+
+#Para que funcione el designer
+# pip install PySide6
+# pyside6-designer
+
+#wordgrap para que se ponga un texto en varias linea
+#para button crear group box y luego darle checkblea a cada uno
+
 from typing import Self
 
 from Ejercicio9 import Ui_MainWindow
@@ -23,7 +40,7 @@ class MainWindow(QMainWindow,Ui_MainWindow):
     
 app = QApplication([])
 app.setStyle("Fusion")
-with open("Estilos/estilo1.qss","r") as f:
+with open("Ejercicio9/Estilos/estilo1.qss","r") as f:
     app.setStyleSheet(f.read())
 ventana = MainWindow()
 app.exec()

@@ -32,15 +32,9 @@ QComboBox, QSpinBox {
     padding: 3px;
 }
 
-QSlider::groove:horizontal {
-    height: 6px;
-    background: #45475A;
-    border-radius: 3px;
-}
 
 QSlider::handle:horizontal {
-    background: #F38BA8;
-    width: 14px;
-    margin: -4px 0;
-    border-radius: 7px;
+    background-image: url(img/anchor.png);
+    width: 64px;
+    height: 64px;
 }

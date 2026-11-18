@@ -1,3 +1,15 @@
+#Para que funcione el modulo
+#python -m venv App (se añadirá contenido a nuestra carpeta)
+#cd App
+#cd Scripts
+#.\activate
+#pip install PyQt6
+# pyuic6 Ej1.ui -o Ej1.py 
+
+#Para que funcione el designer
+# pip install PySide6
+# pyside6-designer
+
 from Ejercicio1 import Ui_MainWindow
 from PyQt6.QtWidgets import QMainWindow, QApplication
 
@@ -9,7 +21,7 @@ class MainWindow(QMainWindow,Ui_MainWindow):
 
 app = QApplication([])
 app.setStyle("Fusion")
-with open("estilos/estilo1.qss","r") as f:
+with open("Ejercicio1/Estilos/estilo1.qss","r") as f:
     app.setStyleSheet(f.read())
 ventana = MainWindow()
 app.exec()

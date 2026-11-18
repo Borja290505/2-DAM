@@ -1,4 +1,18 @@
-from Ejercicio3.Ejercicio3 import Ui_MainWindow
+#Para que funcione el modulo
+#python -m venv App (se añadirá contenido a nuestra carpeta)
+#cd App
+#cd Scripts
+#.\activate
+#pip install PyQt6
+
+#Para crear el .ui 
+# pyuic6 Ej1.ui -o Ej1.py 
+
+#Para que funcione el designer
+# pip install PySide6
+# pyside6-designer
+
+from Ejercicio3 import Ui_MainWindow
 from PyQt6.QtWidgets import QMainWindow, QApplication
 from PyQt6.QtGui import QPalette,QColor
 from PyQt6.QtCore import Qt

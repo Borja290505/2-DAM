@@ -1,17 +1,27 @@
-from typing import Self
-
+import os
+import sys
 from Ejercicio8 import Ui_MainWindow
 from PyQt6.QtWidgets import QMainWindow, QApplication
 
-class MainWindow(QMainWindow,Ui_MainWindow):
+# Fuerza a Python a trabajar dentro de la carpeta donde está este script (Ejercicio8)
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
+class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
-        super(MainWindow,self).__init__()
+        super(MainWindow, self).__init__()
         self.setupUi(self)
-        self.show()
         self.comboBox.currentIndexChanged.connect(self.cambiarEstilo)
+        self.cambiarEstilo()
+        self.show()
 
     def cambiarEstilo(self):
-        with open(["Ejercicio8/Estilos/estilo1.qss","Ejercicio8/Estilos/estilo2.qss","Ejercicio8/Estilos/estilo3.qss"][self.comboBox.currentIndex()],"r") as f:
+        # Ahora las 3 rutas son relativas a la carpeta Ejercicio8
+        estilos = [
+            "Estilos/estilo1.qss",
+            "Estilos/estilo2.qss",
+            "Estilos/estilo3.qss"
+        ]
+        with open(estilos[self.comboBox.currentIndex()], "r") as f:
             app.setStyleSheet(f.read())
     
 app = QApplication([])
