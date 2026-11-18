@@ -15,6 +15,11 @@
 #wordgrap para que se ponga un texto en varias linea
 #para button crear group box y luego darle checkblea a cada uno
 
+#QT for python
+#python
+#PyQtIntegration
+#errorLens
+
 from typing import Self
 
 from Ejercicio9 import Ui_MainWindow
