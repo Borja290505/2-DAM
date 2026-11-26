@@ -263,4 +263,4 @@ packages:
     version: "15.4.0"
 sdks:
   dart: ">=3.14.0 <4.0.0"
-  flutter: ">=3.47.0"
+  flutter: ">=3.47.6"
