@@ -8,24 +8,24 @@ class Pagina2 extends StatefulWidget {
 }
 
 class _Pagina2State extends State<Pagina2> {
+
   int _contador = 0;
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.lightBlueAccent,
       child: Center(
         child: Column(
           children: [
-            Text('$_contador', style: TextStyle(fontSize: 120)),
+            Text('esto es un StateFull'),
+            Text(_contador.toString(), style: TextStyle(fontSize: 120),),
             ElevatedButton(onPressed: () {
-              setState(() {
-                _contador++;
-              });
-              }, 
-              child: Text('Incrementar'),
-            ),
+              _contador++;
+              setState(() {});
+            }, child: Text('Incrementar'))
           ],
-        ),
-      ),
-    );
+        ) 
+        )
+      );
   }
 }
