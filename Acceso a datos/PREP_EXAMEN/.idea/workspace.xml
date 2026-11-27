@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e570ed08-eb3a-4d22-b393-a672ac1f4df0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Ejercicio3_Personas/Persona.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Ejercicio3_Personas/main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Ejercicio8_Canciones/Cancion.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Ejercicio8_Canciones/main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Ejercicio9_Alumnos/Alumno.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Ejercicio9_Alumnos/Main.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Borja290505&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Borja290505/2-DAM.git&quot;,
+    &quot;accountId&quot;: &quot;2cd1dca3-4620-49d2-a1f7-ad7dc2345227&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="3McJavbIQpeOkcwANCRHdy5BOzJ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.main.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/borja/OneDrive/Escritorio/2-DAM/Acceso a datos/PREP_EXAMEN/src/main/java/Ejercicio10_CSV&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/borja/OneDrive/Escritorio/2-DAM/Acceso a datos/PREP_EXAMEN/src/main/java/org/example/Main.java&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\borja\OneDrive\Escritorio\2-DAM\Acceso a datos\PREP_EXAMEN\src\main\java\Ejercicio10_CSV" />
+    </key>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e570ed08-eb3a-4d22-b393-a672ac1f4df0" name="Changes" comment="" />
+      <created>1795643991509</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1795643991509</updated>
+    </task>
+    <servers />
+  </component>
+</project>
